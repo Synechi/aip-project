@@ -1,0 +1,10 @@
+.navbar {
+    justify-content: space-between;
+}
+
+.navButtons {
+    width: 150px;
+    margin-left: 10px;
+    border: 1px solid white;
+
+}
