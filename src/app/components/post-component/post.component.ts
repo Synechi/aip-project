@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  constructor() { }
+  numResponses: number;
+  username: string;
+  image: string;
+
+  constructor() { 
+    this.username = "Test";
+    this.numResponses = 0;
+    this.image = "/assets/flower.jpg"
+  }
 
   ngOnInit() {
   }

@@ -10,6 +10,7 @@ import { AppComponent } from './app-component/app.component';
 import { NavbarComponent } from './components/navbar-component/navbar.component';
 import { LoginComponent } from './components/login-component/login.component';
 import { PostComponent } from './components/post-component/post.component';
+import { SignupComponent } from './components/signup-component/signup.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PostComponent } from './components/post-component/post.component';
     NavbarComponent,
     LoginComponent,
     PostComponent,
+    SignupComponent,
 
   ],
   imports: [
