@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     const target = event.target;
     const uname = target.username.value;
     const pword = target.password.value;
-    this.Auth.getUserDetails(uname, pword);
+    //this.Auth.getUserDetails(uname, pword);
+    //this.Auth.getLoginByUsername(uname).subscribe(())
+
   }
 }
