@@ -1,11 +1,20 @@
 <mat-toolbar color="primary" class="navbar">
-    <div routerLink="/">
-        <h2>AIP Assignment 3</h2>
-    </div>
-    <div>
-        <button mat-button class="navButtons" routerLink="login">Log In</button>
-        <button mat-flat-button class="navButtons" routerLink="signup">Sign Up</button>
-    </div>
+  <div routerLink="/">
+    <h2>AIP Assignment 3</h2>
+  </div>
+  <div>
+    <span *ngIf="!username">
+      <button mat-button class="navButtons" routerLink="login">Log In</button>
+      <button mat-flat-button class="navButtons" routerLink="signup">
+        Sign Up
+      </button>
+    </span>
+    <span *ngIf="username">
+      <button mat-button class="navButtons" (click)="logout()">
+        Logout
+      </button>
+    </span>
+  </div>
 </mat-toolbar>
-  
+
 <router-outlet></router-outlet>

@@ -1,10 +1,23 @@
 <div class="signupComponent">
-    <h2>Sign Up</h2>
-    <form>
-        <mat-form-field>
-            <input matInput placeholder="Input">
-        </mat-form-field>
-            
-        <button mat-flat-button color="primary" type="submit">Sign Up</button>
-    </form>
+  <h2>Sign Up</h2>
+  <p *ngIf="message">{{ message }}</p>
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="userid" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit">Register</button>
+  </form>
 </div>
