@@ -6,6 +6,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -13,6 +15,8 @@ import { NavbarComponent } from "./components/navbar-component/navbar.component"
 import { LoginComponent } from "./components/login-component/login.component";
 import { PostComponent } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
+import { MatMenuModule } from '@angular/material/menu';
+
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
@@ -34,7 +38,11 @@ import { AuthGuard } from "./guards/auth.guard";
     MatButtonModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    MatIconModule,
+    MatMenuModule
+
   ],
   providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]

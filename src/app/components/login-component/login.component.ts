@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       };
       this.authService.postUserLogin(this.userInfo).subscribe(data => {
         console.log(data);
-        if (data.success) {
+        if (data) {
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("token", this.f.userid.value);
           this.router.navigate([this.returnUrl]);
