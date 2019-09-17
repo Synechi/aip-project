@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../service/auth.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: "app-navbar",
@@ -7,7 +10,7 @@ import { AuthService } from "../../service/auth.service";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver) {}
 
   username: string;
 
@@ -20,4 +23,10 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
     window.location.reload();
   }
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
 }
