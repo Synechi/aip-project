@@ -1,0 +1,24 @@
+.createPostComponent {
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    width: 40%;
+    top: 20%;
+    background-color: white;
+    border: 1px solid #7500B9;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+h2 {
+    color: #7500B9;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+}

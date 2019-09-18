@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
+import { CreatePostComponent } from './components/create-post-component/create-post.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AuthGuard } from "./guards/auth.guard";
     NavbarComponent,
     LoginComponent,
     PostComponent,
-    SignupComponent
+    SignupComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,

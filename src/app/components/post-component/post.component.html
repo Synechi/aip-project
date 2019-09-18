@@ -1,12 +1,19 @@
-<div class="postComponent">
-    <h5>user: {{username}}</h5>
-    <img src="{{image}}">
-    <div class="reactionBtns">
-        <button>Like</button>
-        <button>Happy</button>
-        <button>Sad</button>
-        <button>Surprised</button>
-        <button>Angry</button>
+<div class="mainBody">
+    <div class="createPostBtn">
+        <button mat-raised-button color="accent" routerLink="createPost">Create Post</button>
     </div>
-    <button>{{numResponses}} Responses</button>
+    <div class="postComponent">
+        <h5>user: {{username}}</h5>
+        <img src="{{image}}">
+        <div class="reactionBtns">
+            <button>Like</button>
+            <button>Happy</button>
+            <button>Sad</button>
+            <button>Surprised</button>
+            <button>Angry</button>
+        </div>
+        <button>{{numResponses}} Responses</button>
+    </div>
 </div>
+
+<router-outlet></router-outlet>

@@ -1,17 +1,22 @@
+.mainBody {
+    width: 100%;
+    margin-top: 3%;
+}
+
+.createPostBtn {
+    float: left;
+    margin-left: 10%;
+}
+
 .postComponent{
-    position: absolute;
-    left: 20%;
-    right: 20%;
+    float: right;
+    margin-right: 10%;
     width: 60%;
-    margin-top: 30px;
     background-color: white;
     border: 1px solid #7500B9;;
     border-radius: 4px;
     padding: 10px;
-
 }
-
-
 
 img {
     display: block;

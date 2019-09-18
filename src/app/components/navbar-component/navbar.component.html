@@ -19,11 +19,11 @@
           mat-button 
           [matMenuTriggerFor]="menu">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="login">Log in</button>
-            <button mat-menu-item routerLink="signup">Sign up</button>
-        </mat-menu>
+      </button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="login">Log in</button>
+          <button mat-menu-item routerLink="signup">Sign up</button>
+      </mat-menu>
         
     </span>
     <span *ngIf="username">
