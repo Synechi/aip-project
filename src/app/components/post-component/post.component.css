@@ -18,9 +18,23 @@
     padding: 10px;
 }
 
+.postComponent > *:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+h4 {
+    color: #7500B9;
+}
+
 img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 70%;
 }
+
+.postBtns {
+    display: flex;
+    justify-content: space-between;
+}
+

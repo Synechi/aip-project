@@ -1,0 +1,27 @@
+<div class="viewPostComponent">
+    <div class="post">
+        <h4>user: {{username}}</h4>
+        <img src="{{image}}">
+        <mat-button-toggle-group class="reactionBtns">
+            <mat-button-toggle>👍</mat-button-toggle>
+            <mat-button-toggle>😆</mat-button-toggle>
+            <mat-button-toggle>😥</mat-button-toggle>
+            <mat-button-toggle>😮</mat-button-toggle>
+            <mat-button-toggle>😠</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <hr>
+    <div>
+        <h4>Respond</h4>
+        <form (ngSubmit)="uploadImage()">
+            <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
+            <img [src]="imgURL" *ngIf="imgURL">
+            <button mat-flat-button color="primary" *ngIf="imgURL" type="submit">Upload Response</button>
+        </form>
+    </div>
+    <hr>
+    <div>
+       <h4>Responses</h4>
+    </div>
+</div>
+      

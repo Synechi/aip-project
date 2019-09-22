@@ -8,6 +8,10 @@ import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { CreatePostComponent } from './components/create-post-component/create-post.component';
+
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -15,12 +19,10 @@ import { NavbarComponent } from "./components/navbar-component/navbar.component"
 import { LoginComponent } from "./components/login-component/login.component";
 import { PostComponent } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
-import { MatMenuModule } from '@angular/material/menu';
-
+import { ViewPostComponent } from './components/view-post-component/view-post.component';
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
-import { CreatePostComponent } from './components/create-post-component/create-post.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { CreatePostComponent } from './components/create-post-component/create-p
     LoginComponent,
     PostComponent,
     SignupComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    ViewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { CreatePostComponent } from './components/create-post-component/create-p
     ReactiveFormsModule,
     LayoutModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule,
 
   ],
   providers: [AuthGuard, AuthService],

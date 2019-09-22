@@ -12,7 +12,7 @@ export class PostComponent implements OnInit {
   image: string;
 
   constructor() { 
-    this.username = "Test";
+    this.username = "Name goes here";
     this.numResponses = 0;
     this.image = "/assets/flower.jpg"
   }
