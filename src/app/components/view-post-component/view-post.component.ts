@@ -51,7 +51,7 @@ export class ViewPostComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      this.reportReason = result;
+      this.reportReason = result;       // Report reason input is retrieved here
     });
   }
 
