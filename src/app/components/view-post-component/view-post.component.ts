@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export interface DialogData {
+  reportReason: string;
+}
 
 @Component({
   selector: 'app-view-post',
@@ -11,7 +16,7 @@ export class ViewPostComponent implements OnInit {
   username: string;
   image: string;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.username = "Name goes here";
     this.numResponses = 0;
     this.image = "/assets/flower.jpg"
@@ -34,4 +39,36 @@ export class ViewPostComponent implements OnInit {
   uploadImage() {
 
   }
+
+
+  reportReason: string;
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ReportPost, {
+      width: '30%',
+      data: {reportReason: this.reportReason}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.reportReason = result;
+    });
+  }
+
 }
+
+@Component({
+  selector: 'report-post',
+  templateUrl: 'report-post.html',
+  styleUrls: ['report-post.css']
+})
+export class ReportPost {
+  constructor(public dialogRef: MatDialogRef<ReportPost>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }  
+}
+
+

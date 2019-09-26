@@ -24,3 +24,8 @@ img {
 .post > *{
     margin-bottom: 30px;
 }
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+}

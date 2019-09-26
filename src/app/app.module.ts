@@ -10,8 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
-import { CreatePostComponent } from './components/create-post-component/create-post.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -19,7 +18,8 @@ import { NavbarComponent } from "./components/navbar-component/navbar.component"
 import { LoginComponent } from "./components/login-component/login.component";
 import { PostComponent } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
-import { ViewPostComponent } from './components/view-post-component/view-post.component';
+import { ViewPostComponent, ReportPost } from './components/view-post-component/view-post.component';
+import { CreatePostComponent } from './components/create-post-component/create-post.component';
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
@@ -32,7 +32,8 @@ import { AuthGuard } from "./guards/auth.guard";
     PostComponent,
     SignupComponent,
     CreatePostComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    ReportPost
   ],
   imports: [
     BrowserModule,
@@ -48,8 +49,10 @@ import { AuthGuard } from "./guards/auth.guard";
     MatIconModule,
     MatMenuModule,
     MatButtonToggleModule,
+    MatDialogModule,
 
   ],
+  entryComponents: [ReportPost],
   providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
