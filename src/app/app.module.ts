@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -50,7 +51,7 @@ import { AuthGuard } from "./guards/auth.guard";
     MatMenuModule,
     MatButtonToggleModule,
     MatDialogModule,
-
+    MatPaginatorModule,
   ],
   entryComponents: [ReportPost],
   providers: [AuthGuard, AuthService],

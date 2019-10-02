@@ -1,4 +1,6 @@
 <div class="createPostComponent">
+    <button mat-stroked-button color="primary" routerLink="/">&#60; Back</button>
+
     <h2>Create Post</h2>
     <form (ngSubmit)="uploadImage()">
         <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
