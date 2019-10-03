@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ImageService } from "../../service/image.service";
 
 @Component({
   selector: 'app-create-post',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor() { }
+  constructor(private imageService: ImageService) { }
 
   ngOnInit() {
 
@@ -34,7 +34,17 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  uploadImage() {
+// Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
+  uploadImage(imageInput) {
+    var file: File = imageInput.files[0];
 
+    this.imageService.uploadImage(file).subscribe(
+      (res) => {
+
+      },
+      (err) => {
+
+      })
+    
   }
 }

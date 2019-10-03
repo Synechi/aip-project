@@ -24,6 +24,7 @@ import { CreatePostComponent } from './components/create-post-component/create-p
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
+import { ImageService } from "./service/image.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { AuthGuard } from "./guards/auth.guard";
     MatPaginatorModule,
   ],
   entryComponents: [ReportPost],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -3,7 +3,7 @@
 
     <h2>Create Post</h2>
     <!-- Code source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/ -->
-    <form (ngSubmit)="uploadImage()">
+    <form (ngSubmit)="uploadImage(file)">
         <span *ngIf="errorMessage">
             <h5>{{errorMessage}}</h5>
         </span>
@@ -12,4 +12,4 @@
         <button mat-flat-button color="primary" *ngIf="imgURL" type="submit">Upload</button>
     </form>
 </div>
-      
+       
