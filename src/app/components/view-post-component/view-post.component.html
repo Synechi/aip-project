@@ -1,0 +1,35 @@
+<div class="viewPostComponent">
+    <button mat-stroked-button color="primary" routerLink="/">&#60; Back</button>
+    <div class="post">
+        <div class="postHeader">
+            <h4>user: {{username}}</h4>
+            <button mat-flat-button color="warn" (click)="openDialog()">
+                <mat-icon>flag</mat-icon>
+            </button>
+        </div>
+        <img src="{{image}}">
+        <mat-button-toggle-group class="reactionBtns">
+            <mat-button-toggle>👍</mat-button-toggle>
+            <mat-button-toggle>😆</mat-button-toggle>
+            <mat-button-toggle>😥</mat-button-toggle>
+            <mat-button-toggle>😮</mat-button-toggle>
+            <mat-button-toggle>😠</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <hr>
+    <div>
+        <h4>Respond</h4>
+        <form (ngSubmit)="uploadImage()">
+            <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
+            <img [src]="imgURL" *ngIf="imgURL">
+            <button mat-flat-button color="primary" *ngIf="imgURL" type="submit">Upload Response</button>
+        </form>
+    </div>
+    <hr>
+    <div>
+       <h4>Responses</h4>
+       <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" [pageSize]="5"></mat-paginator>
+
+    </div>
+</div>
+      

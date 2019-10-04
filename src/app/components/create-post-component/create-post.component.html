@@ -1,0 +1,15 @@
+<div class="createPostComponent">
+    <button mat-stroked-button color="primary" routerLink="/">&#60; Back</button>
+
+    <h2>Create Post</h2>
+    <!-- Code source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/ -->
+    <form (ngSubmit)="uploadImage(file)">
+        <span *ngIf="errorMessage">
+            <h5>{{errorMessage}}</h5>
+        </span>
+        <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
+        <img [src]="imgURL" *ngIf="imgURL">
+        <button mat-flat-button color="primary" *ngIf="imgURL" type="submit">Upload</button>
+    </form>
+</div>
+       

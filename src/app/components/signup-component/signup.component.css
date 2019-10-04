@@ -2,7 +2,8 @@
     position: absolute;
     left: 30%;
     right: 30%;
-    width: 40%;
+    max-width: 40%;
+    min-width: 100px;
     top: 20%;
     background-color: white;
     border: 1px solid #7500B9;

@@ -1,11 +1,37 @@
 <mat-toolbar color="primary" class="navbar">
-    <div routerLink="/">
-        <h2>AIP Assignment 3</h2>
-    </div>
-    <div>
-        <button mat-button class="navButtons" routerLink="login">Log In</button>
-        <button mat-flat-button class="navButtons" routerLink="signup">Sign Up</button>
-    </div>
+  <div routerLink="/">
+    <h2>AIP Assignment 3</h2>
+  </div>
+  <div>
+    <span *ngIf="!username">
+      <button *ngIf="!(isHandset$ | async)" mat-button class="navButtons" routerLink="login">
+        Log In
+      </button>
+      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" routerLink="signup">
+        Sign Up
+      </button>
+
+      <button 
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          *ngIf="isHandset$ | async"
+          mat-button 
+          [matMenuTriggerFor]="menu">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="login">Log in</button>
+          <button mat-menu-item routerLink="signup">Sign up</button>
+      </mat-menu>
+        
+    </span>
+    <span *ngIf="username">
+      <button mat-button class="navButtons" (click)="logout()">
+        Logout
+      </button>
+    </span>
+  </div>
 </mat-toolbar>
-  
+
 <router-outlet></router-outlet>

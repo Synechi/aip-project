@@ -1,12 +1,25 @@
-<div class="postComponent">
-    <h5>user: {{username}}</h5>
-    <img src="{{image}}">
-    <div class="reactionBtns">
-        <button>Like</button>
-        <button>Happy</button>
-        <button>Sad</button>
-        <button>Surprised</button>
-        <button>Angry</button>
+<mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" [pageSize]="5"></mat-paginator>
+
+<div class="mainBody">
+    <div class="createPostBtn">
+        <button mat-raised-button color="accent" routerLink="createPost">Create Post</button>
     </div>
-    <button>{{numResponses}} Responses</button>
+    <div class="postComponent">
+        <h4>user: {{username}}</h4>
+        <img src="{{image}}" routerLink="viewPost">
+
+        <div class="postBtns">
+            <mat-button-toggle-group>
+                <mat-button-toggle>👍</mat-button-toggle>
+                <mat-button-toggle>😆</mat-button-toggle>
+                <mat-button-toggle>😥</mat-button-toggle>
+                <mat-button-toggle>😮</mat-button-toggle>
+                <mat-button-toggle>😠</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <button mat-flat-button color="primary" routerLink="viewPost">{{numResponses}} Responses</button>
+        </div>
+    </div>
 </div>
+
+<router-outlet></router-outlet>

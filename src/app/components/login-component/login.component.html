@@ -1,14 +1,22 @@
 <div class="loginComponent">
-    <h2>Sign In</h2>
-    <form>
-        <mat-form-field>
-            <input matInput placeholder="Username">
-        </mat-form-field>
-        
-        <mat-form-field>
-            <input matInput type="password" placeholder="Password">
-        </mat-form-field>
+  <button mat-stroked-button color="primary" routerLink="/">&#60; Back</button>
 
-        <button mat-flat-button color="primary" type="submit">Sign In</button>
-    </form>
+  <h2>Sign In</h2>
+  <p *ngIf="message">{{ message }}</p>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="userid" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit">Sign In</button>
+  </form>
 </div>
