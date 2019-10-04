@@ -19,4 +19,12 @@ export class ImageService {
 
         return this.http.post(`${this.uri}/image-upload`, formData);
     }
+
+    public storeImageUrl(username, imageUrl) {
+        const imageInfo = {
+            username: username,
+            imageUrl: imageUrl
+        }
+        return this.http.post(`${this.uri}/save-url`, imageInfo);
+    }
 }
