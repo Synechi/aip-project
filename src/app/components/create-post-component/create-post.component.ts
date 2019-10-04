@@ -29,6 +29,10 @@ export class CreatePostComponent implements OnInit {
       this.errorMessage = "Only images can be uploaded";
       return;
     }
+    if (files[0].size > 2000000) {
+      this.errorMessage = "Image is too large";
+      return;
+    }
 
     var fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]); 
@@ -42,19 +46,20 @@ export class CreatePostComponent implements OnInit {
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   uploadImage(imageInput) {
     var file: File = imageInput.files[0];
-
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
-        this.imageInfo$ = {
-          username: this.username,
-          imageUrl: res.imageUrl
-        }
         
-        this.imageService.storeImageUrl(this.imageInfo$);
+        
+        this.imageService.storeImageUrl(this.username, res.imageUrl).subscribe(
+          (err) => {
+
+          }
+        );
+        console.log(this.imageInfo$);
       },
       (err) => {
 
-      })
+      });
     
   }
 }
