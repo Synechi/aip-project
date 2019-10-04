@@ -6,6 +6,8 @@ import { PostComponent } from './components/post-component/post.component';
 import { SignupComponent } from './components/signup-component/signup.component';
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
 import { ViewPostComponent } from './components/view-post-component/view-post.component';
+import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
+
 
 
 const routes: Routes = [
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home/createPost', component: CreatePostComponent},
   { path: 'home/viewPost', component: ViewPostComponent},
+  {path: 'home/leaderBoard', component: LeaderBoardComponent}
 
 ];
 

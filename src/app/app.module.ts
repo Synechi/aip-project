@@ -25,7 +25,7 @@ import { CreatePostComponent } from './components/create-post-component/create-p
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
-import { LeaderBoardComponent } from './leader-board/leader-board.component';
+import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 
 @NgModule({
   declarations: [
