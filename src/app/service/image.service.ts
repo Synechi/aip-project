@@ -19,4 +19,8 @@ export class ImageService {
 
         return this.http.post(`${this.uri}/image-upload`, formData);
     }
+
+    public storeImageUrl(imageInfo) {
+        return this.http.post(`${this.uri}/save-url`, imageInfo);
+    }
 }

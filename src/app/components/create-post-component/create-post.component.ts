@@ -10,12 +10,15 @@ export class CreatePostComponent implements OnInit {
 
   constructor(private imageService: ImageService) { }
 
-  ngOnInit() {
+  username: string;
 
+  ngOnInit() {
+    this.username = localStorage.getItem("token");
   }
 
   imgURL: string | ArrayBuffer;
   errorMessage: string;
+  imageInfo$;
  
   // Function source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
   seeImage(files) {
@@ -34,13 +37,20 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-// Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
+
+
+  // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   uploadImage(imageInput) {
     var file: File = imageInput.files[0];
 
     this.imageService.uploadImage(file).subscribe(
-      (res) => {
-
+      (res: any) => {
+        this.imageInfo$ = {
+          username: this.username,
+          imageUrl: res.imageUrl
+        }
+        
+        this.imageService.storeImageUrl(this.imageInfo$);
       },
       (err) => {
 
