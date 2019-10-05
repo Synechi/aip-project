@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from "../../service/image.service";
 
 @Component({
   selector: 'app-post',
@@ -7,17 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  numResponses: number;
   username: string;
-  image: string;
 
-  constructor() { 
-    this.username = "Name goes here";
-    this.numResponses = 0;
-    this.image = "/assets/flower.jpg"
+  constructor(private imageService: ImageService) { 
+    this.username = localStorage.getItem("token");
+
   }
+
+  images: any;
+  errorMessage: string;
 
   ngOnInit() {
+    this.imageService.getAllImages().subscribe(
+      (res: any) => {
+        this.images = Array.of(res);
+        this.images = this.images[0];
+        this.images.reverse();
+      },
+      (err) => {
+        this.errorMessage = "Failed to load images, refresh the page to try again."
+      }
+    );
   }
+
+
 
 }

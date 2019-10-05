@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from "../../service/image.service";
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-create-post',
@@ -8,17 +10,22 @@ import { ImageService } from "../../service/image.service";
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor(private imageService: ImageService) { }
+
+  constructor(
+    private imageService: ImageService,
+    private router: Router
+  ) { }
 
   username: string;
+  returnUrl: string;
 
   ngOnInit() {
     this.username = localStorage.getItem("token");
+    this.returnUrl = "/home";
   }
 
   imgURL: string | ArrayBuffer;
   errorMessage: string;
-  imageInfo$;
  
   // Function source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
   seeImage(files) {
@@ -29,7 +36,7 @@ export class CreatePostComponent implements OnInit {
       this.errorMessage = "Only images can be uploaded";
       return;
     }
-    if (files[0].size > 2000000) {
+    if (files[0].size > 2000000) {        // If file is greater then 2MB
       this.errorMessage = "Image is too large";
       return;
     }
@@ -48,18 +55,17 @@ export class CreatePostComponent implements OnInit {
     var file: File = imageInput.files[0];
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
-        
-        
         this.imageService.storeImageUrl(this.username, res.imageUrl).subscribe(
+          (res) => {
+            this.router.navigate([this.returnUrl]);
+          },
           (err) => {
-
+            this.errorMessage = "Upload Failed"
           }
         );
-        console.log(this.imageInfo$);
       },
       (err) => {
-
+        this.errorMessage = "Upload Failed"
       });
-    
   }
 }

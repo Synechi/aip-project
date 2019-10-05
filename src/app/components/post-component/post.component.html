@@ -1,12 +1,11 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" [pageSize]="5"></mat-paginator>
-
+<div class="mainbody" *ngIf="errorMessage">
+    <h2>{{errorMessage}}</h2>
+</div>
 <div class="mainBody">
-    <div class="createPostBtn">
-        <button mat-raised-button color="accent" routerLink="createPost">Create Post</button>
-    </div>
-    <div class="postComponent">
-        <h4>user: {{username}}</h4>
-        <img src="{{image}}" routerLink="viewPost">
+    <div class="postComponent" *ngFor="let image of images">
+        <h4>user: {{image.username}}</h4>
+        <img src="{{image.imageUrl}}" routerLink="viewPost">
 
         <div class="postBtns">
             <mat-button-toggle-group>

@@ -27,4 +27,8 @@ export class ImageService {
         }
         return this.http.post(`${this.uri}/save-url`, imageInfo);
     }
+
+    public getAllImages() {
+        return this.http.get(`${this.uri}/get-all-images`);
+    }
 }

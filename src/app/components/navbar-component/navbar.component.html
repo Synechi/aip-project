@@ -27,9 +27,26 @@
         
     </span>
     <span *ngIf="username">
-      <button mat-button class="navButtons" (click)="logout()">
+      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" color="accent" routerLink="createPost">
+        Create Post
+      </button>
+      <button *ngIf="!(isHandset$ | async)" mat-button class="navButtons" (click)="logout()">
         Logout
       </button>
+
+      <button 
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          *ngIf="isHandset$ | async"
+          mat-button 
+          [matMenuTriggerFor]="menu">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="createPost">Create Post</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
     </span>
   </div>
 </mat-toolbar>
