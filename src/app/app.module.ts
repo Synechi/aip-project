@@ -25,6 +25,7 @@ import { CreatePostComponent } from './components/create-post-component/create-p
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
+import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ImageService } from "./service/image.service";
     SignupComponent,
     CreatePostComponent,
     ViewPostComponent,
-    ReportPost
+    ReportPost,
+    ViewOwnPostsComponent
   ],
   imports: [
     BrowserModule,

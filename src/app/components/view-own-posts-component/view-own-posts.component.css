@@ -1,0 +1,31 @@
+.mainBody {
+    width: 100%;
+    margin-top: 3%;
+}
+
+.postComponent{
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-bottom: 3%;
+    width: 70%;
+    background-color: white;
+    border: 1px solid #7500B9;;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.postComponent > *:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+button {
+    margin-right: 3%;
+}

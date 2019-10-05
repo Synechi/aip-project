@@ -66,6 +66,7 @@ export class CreatePostComponent implements OnInit {
       },
       (err) => {
         this.errorMessage = "Upload Failed"
-      });
+      }
+    );
   }
 }

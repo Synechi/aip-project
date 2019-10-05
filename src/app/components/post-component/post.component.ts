@@ -10,10 +10,7 @@ export class PostComponent implements OnInit {
 
   username: string;
 
-  constructor(private imageService: ImageService) { 
-    this.username = localStorage.getItem("token");
-
-  }
+  constructor(private imageService: ImageService) {}
 
   images: any;
   errorMessage: string;

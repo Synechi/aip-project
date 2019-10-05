@@ -31,4 +31,20 @@ export class ImageService {
     public getAllImages() {
         return this.http.get(`${this.uri}/get-all-images`);
     }
+
+    public deleteImage(imageUrl) {
+        const imageInfo = {
+            imageUrl: imageUrl
+        }
+        return this.http.post(`${this.uri}/delete-image`, imageInfo);
+    }
+
+    public updateImage(oldImageUrl, newimageUrl) {
+        const imageInfo = {
+            oldImageUrl: oldImageUrl,
+            newImageUrl: newimageUrl
+        }
+        return this.http.post(`${this.uri}/update-image`, imageInfo);
+
+    }
 }
