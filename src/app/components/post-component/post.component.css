@@ -46,3 +46,8 @@ img {
     padding: 5px;
     text-align: center;
 }
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+}

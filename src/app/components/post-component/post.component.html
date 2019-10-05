@@ -4,7 +4,12 @@
 <div class="mainBody">
     <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
     <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 10, currentPage: p }">
-        <h4>user: {{image.username}}</h4>
+        <div class="postHeader">
+            <h4>user: {{username}}</h4>
+            <button *ngIf="username" mat-flat-button color="warn" (click)="openDialog()">
+                <mat-icon>flag</mat-icon>
+            </button>
+        </div>
         <img src="{{image.imageUrl}}" routerLink="viewPost">
 
         <div class="postBtns">
@@ -16,7 +21,22 @@
                 <mat-button-toggle>😠</mat-button-toggle>
             </mat-button-toggle-group>
  
-            <button mat-flat-button color="primary" routerLink="viewPost">{{numResponses}} Responses</button>
+            <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
+        </div>
+        <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
+            <div *ngIf="username">
+                <hr>
+                <h4>Respond</h4>
+                <form (ngSubmit)="uploadResponse()">
+                    <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
+                    <img [src]="imgURL" *ngIf="imgURL">
+                    <button mat-flat-button color="primary" *ngIf="imgURL" type="submit">Upload Response</button>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <h4>Responses</h4>
+            </div>
         </div>
     </div>
     <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->

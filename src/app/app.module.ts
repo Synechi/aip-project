@@ -17,9 +17,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
 import { NavbarComponent } from "./components/navbar-component/navbar.component";
 import { LoginComponent } from "./components/login-component/login.component";
-import { PostComponent } from "./components/post-component/post.component";
+import { PostComponent, ReportPost } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
-import { ViewPostComponent, ReportPost } from './components/view-post-component/view-post.component';
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
 
 import { AuthService } from "./service/auth.service";
@@ -35,7 +34,6 @@ import { ViewOwnPostsComponent } from './components/view-own-posts-component/vie
     PostComponent,
     SignupComponent,
     CreatePostComponent,
-    ViewPostComponent,
     ReportPost,
     ViewOwnPostsComponent
   ],
