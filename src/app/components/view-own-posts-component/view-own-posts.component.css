@@ -29,3 +29,18 @@ img {
 button {
     margin-right: 3%;
 }
+
+
+
+.paginatorDiv {
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-bottom: 3%;
+    width: 70%;
+    background-color: white;
+    border: 1px solid #7500B9;;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+}
+

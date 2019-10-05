@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -54,7 +54,7 @@ import { ViewOwnPostsComponent } from './components/view-own-posts-component/vie
     MatMenuModule,
     MatButtonToggleModule,
     MatDialogModule,
-    MatPaginatorModule,
+    NgxPaginationModule,
   ],
   entryComponents: [ReportPost],
   providers: [AuthGuard, AuthService, ImageService],

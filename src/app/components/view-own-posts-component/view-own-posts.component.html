@@ -2,7 +2,8 @@
     <h2>{{errorMessage}}</h2>
 </div>
 <div class="mainBody">
-    <div class="postComponent" *ngFor="let image of images">
+    <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+    <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 10, currentPage: p }">
         <img src="{{image.imageUrl}}" routerLink="../home/viewPost">
         <button mat-flat-button color="primary" routerLink="../home/viewPost">{{numResponses}} Responses</button>
         <button mat-flat-button color="warn" (click)="deletePost(image.imageUrl)">Delete Post</button>
@@ -18,5 +19,10 @@
             <button mat-flat-button color="accent" *ngIf="imgURL" type="submit">Change Image</button>
         </form>
     </div>
+    <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+    <div class="paginatorDiv">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+        
 </div>
     
