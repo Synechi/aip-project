@@ -47,4 +47,13 @@ export class ImageService {
         return this.http.post(`${this.uri}/update-image`, imageInfo);
 
     }
+
+    public storeResponseImageUrl(username, parentImageUrl, imageUrl) {
+        const responseImageInfo = {
+            username: username,
+            parentImageUrl: parentImageUrl,
+            imageUrl: imageUrl
+        }
+        return this.http.post(`${this.uri}/save-response-image-url`, responseImageInfo);
+    }
 }

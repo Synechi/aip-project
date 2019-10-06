@@ -26,12 +26,9 @@
         <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
             <div *ngIf="username">
                 <hr>
-                <h4>Respond</h4>
-                <form (ngSubmit)="uploadResponse()">
-                    <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
-                    <img [src]="imgURL" *ngIf="imgURL">
-                    <button mat-flat-button color="primary" *ngIf="imgURL" type="submit">Upload Response</button>
-                </form>
+                <button *ngIf="username" mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
+                    Create Response
+                </button>
             </div>
             <hr>
             <div>
