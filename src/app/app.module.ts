@@ -21,11 +21,12 @@ import { PostComponent } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
 import { ViewPostComponent, ReportPost } from './components/view-post-component/view-post.component';
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
+import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
+
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
-import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 
 @NgModule({
   declarations: [
