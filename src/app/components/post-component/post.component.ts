@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ImageService } from "../../service/image.service";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -24,17 +24,18 @@ export class PostComponent implements OnInit {
 
   images: any;
   errorMessage: string;
-  username: string;
+  currentUser: string;
   toggleResponsesBools;  
 
   ngOnInit() {
-    this.username = localStorage.getItem("token");
+    this.currentUser = localStorage.getItem("token");
 
     this.imageService.getAllImages().subscribe(
       (res: any) => {
         this.images = Array.of(res);
         this.images = this.images[0];
         this.images.reverse();
+        console.log(this.images);
 
         this.toggleResponsesBools = new Array(this.images.length);
         this.toggleResponsesBools.fill(false);
@@ -81,9 +82,10 @@ export class PostComponent implements OnInit {
   uploadResponseImage(imageInput) {
     var file: File = imageInput.file;
     var parentImageUrl = imageInput.parentImageUrl
+    var parentImageId = imageInput._id
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
-        this.imageService.storeResponseImageUrl(this.username, parentImageUrl, res.imageUrl).subscribe(
+        this.imageService.storeResponseImageUrl(this.currentUser, parentImageUrl, res.imageUrl, parentImageId).subscribe(
           (res) => {
             window.location.reload();
           },
@@ -160,6 +162,65 @@ export class CreateResponse {
       parentImageUrl: this.data.parentImageUrl
     }
   }
+}
 
-  
+
+@Component({
+  selector: 'post-responses',
+  templateUrl: 'post-responses.html',
+  styleUrls: ['post-responses.css']
+})
+export class PostResponses {
+  @Input() childImage;
+  @Input() parentUrl;
+
+  constructor(
+    private imageService: ImageService,
+    public dialog: MatDialog
+  ) {}
+
+  currentUser: string;
+
+  ngOnInit() {
+    this.currentUser = localStorage.getItem("token");
+  }
+
+
+  openCreateResponseDialog(parentImageUrl) {
+    const dialogRef = this.dialog.open(CreateResponse, {
+      width: '50%',
+      data: {parentImageUrl: parentImageUrl}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {   // Image file is retrieved here
+      if(result) {
+        this.uploadResponseImage(result);
+      }
+    });
+  }
+
+  errorMessage: string;
+
+  // Upload image to amason s3, if successful save url to mongodb
+  uploadResponseImage(imageInput) {
+    var file: File = imageInput.file;
+    var parentImageUrl = imageInput.parentImageUrl
+    var parentImageId = imageInput._id
+    this.imageService.uploadImage(file).subscribe(
+      (res: any) => {
+        this.imageService.storeResponseImageUrl(this.currentUser, parentImageUrl, res.imageUrl, parentImageId).subscribe(
+          (res) => {
+            window.location.reload();
+          },
+          (err) => {
+            this.errorMessage = "Upload Failed"
+          }
+        );
+      },
+      (err) => {
+        this.errorMessage = "Upload Failed"
+      }
+    );
+  }
+ 
 }

@@ -48,11 +48,12 @@ export class ImageService {
 
     }
 
-    public storeResponseImageUrl(username, parentImageUrl, imageUrl) {
+    public storeResponseImageUrl(username, parentImageUrl, imageUrl, parentImageId) {
         const responseImageInfo = {
             username: username,
             parentImageUrl: parentImageUrl,
-            imageUrl: imageUrl
+            imageUrl: imageUrl,
+            parentImageId: parentImageId
         }
         return this.http.post(`${this.uri}/save-response-image-url`, responseImageInfo);
     }

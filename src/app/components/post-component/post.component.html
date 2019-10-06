@@ -5,12 +5,12 @@
     <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
     <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 10, currentPage: p }">
         <div class="postHeader">
-            <h4>user: {{username}}</h4>
-            <button *ngIf="username" mat-flat-button color="warn" (click)="openDialog()">
+            <h4>user: {{image.username}}</h4>
+            <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openDialog()">
                 <mat-icon>flag</mat-icon>
             </button>
         </div>
-        <img src="{{image.imageUrl}}" routerLink="viewPost">
+        <img src="{{image.imageUrl}}">
 
         <div class="postBtns">
             <mat-button-toggle-group>
@@ -24,15 +24,20 @@
             <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
         </div>
         <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
-            <div *ngIf="username">
+            <div *ngIf="currentUser">
                 <hr>
-                <button *ngIf="username" mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
+                <button mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
                     Create Response
                 </button>
             </div>
             <hr>
             <div>
                 <h4>Responses</h4>
+                <post-responses 
+                    *ngFor="let item of image.children"
+                    [childImage]="item"
+                    [parentUrl]="image.imageUrl">
+                </post-responses>
             </div>
         </div>
     </div>

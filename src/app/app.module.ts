@@ -17,7 +17,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
 import { NavbarComponent } from "./components/navbar-component/navbar.component";
 import { LoginComponent } from "./components/login-component/login.component";
-import { PostComponent, ReportPost, CreateResponse } from "./components/post-component/post.component";
+import { PostComponent, ReportPost, CreateResponse, PostResponses } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
 
@@ -36,7 +36,8 @@ import { ViewOwnPostsComponent } from './components/view-own-posts-component/vie
     CreatePostComponent,
     ReportPost,
     CreateResponse,
-    ViewOwnPostsComponent
+    ViewOwnPostsComponent,
+    PostResponses
   ],
   imports: [
     BrowserModule,
