@@ -82,10 +82,9 @@ export class PostComponent implements OnInit {
   uploadResponseImage(imageInput) {
     var file: File = imageInput.file;
     var parentImageUrl = imageInput.parentImageUrl
-    var parentImageId = imageInput._id
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
-        this.imageService.storeResponseImageUrl(this.currentUser, parentImageUrl, res.imageUrl, parentImageId).subscribe(
+        this.imageService.storeResponseImageUrl(this.currentUser, parentImageUrl, res.imageUrl).subscribe(
           (res) => {
             window.location.reload();
           },
@@ -205,10 +204,9 @@ export class PostResponses {
   uploadResponseImage(imageInput) {
     var file: File = imageInput.file;
     var parentImageUrl = imageInput.parentImageUrl
-    var parentImageId = imageInput._id
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
-        this.imageService.storeResponseImageUrl(this.currentUser, parentImageUrl, res.imageUrl, parentImageId).subscribe(
+        this.imageService.storeResponseImageUrl(this.currentUser, parentImageUrl, res.imageUrl).subscribe(
           (res) => {
             window.location.reload();
           },
