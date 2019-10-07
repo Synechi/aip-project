@@ -40,7 +40,7 @@ export class ViewOwnPostsComponent implements OnInit {
   }
 
   deletePost(imgUrl: string){
-    this.imageService.deleteImage(imgUrl).subscribe(
+    this.imageService.deleteImage(this.username, imgUrl).subscribe(
       (res) => {
         window.location.reload();
       },
@@ -74,6 +74,19 @@ export class ViewOwnPostsComponent implements OnInit {
     }
   }
 
+  sortType: string = "Old";
+
+  changeSortType() {
+    this.images.reverse();
+
+    if(this.sortType === "Old") {
+      this.sortType = "New"
+    } else {
+      this.sortType = "Old"
+    }
+  }
+
+
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   changeImage(oldImageUrl, imageInput) {
     var file: File = imageInput.files[0];
@@ -94,4 +107,14 @@ export class ViewOwnPostsComponent implements OnInit {
     );
   }
 
+  replaceWithPlaceholder(oldImageUrl) {
+    this.imageService.replaceWithPlaceholder(oldImageUrl).subscribe(
+      (res) => {
+        window.location.reload();
+      },
+      (err) => {
+        this.errorMessage = "Replacement Failed"
+      }
+    );
+  }
 }

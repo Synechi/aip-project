@@ -1,23 +1,29 @@
-<div class="mainbody" *ngIf="errorMessage">
-    <h2>{{errorMessage}}</h2>
-</div>
+
 <div class="mainBody">
+    <div class="sortBtn">
+        <button mat-raised-button (click)="changeSortType()">Sort Posts By {{sortType}}</button>
+    </div>
+    <div *ngIf="errorMessage">
+        <h2>{{errorMessage}}</h2>
+    </div>
     <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
     <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 10, currentPage: p }">
         <img src="{{image.imageUrl}}" routerLink="../home/viewPost">
-        <button mat-flat-button color="primary" routerLink="../home/viewPost">{{numResponses}} Responses</button>
-        <button mat-flat-button color="warn" (click)="deletePost(image.imageUrl)">Delete Post</button>
-        <hr>
-        <h4>Change Post Image</h4>
-        <p>(Max Size 2MB)</p>
-        <form (ngSubmit)="changeImage(image.imageUrl, file)">
-            <span *ngIf="uploadErrorMessage">
-                <h5>{{uploadErrorMessage}}</h5>
-            </span>
-            <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
-            <img [src]="imgURL" *ngIf="imgURL">
-            <button mat-flat-button color="accent" *ngIf="imgURL" type="submit">Change Image</button>
-        </form>
+        <button *ngIf="image.children.length > 0 && image.imageUrl != 'https://aip-project2019.s3.ap-southeast-2.amazonaws.com/1570419663723'" mat-flat-button color="warn" (click)="replaceWithPlaceholder(image.imageUrl)">Replace Image With Placeholder</button>
+        <button *ngIf="!(image.children.length > 0)" mat-flat-button color="warn" (click)="deletePost(image.imageUrl)">Delete Post</button>
+        <div *ngIf="!(image.children.length > 0)">
+            <hr>
+            <h4>Change Post Image</h4>
+            <p>(Max Size 2MB)</p>
+            <form (ngSubmit)="changeImage(image.imageUrl, file)">
+                <span *ngIf="uploadErrorMessage">
+                    <h5>{{uploadErrorMessage}}</h5>
+                </span>
+                <input #file type="file" accept='image/*' (change)="seeImage(file.files)"/>
+                <img [src]="imgURL" *ngIf="imgURL">
+                <button mat-flat-button color="accent" *ngIf="imgURL" type="submit">Change Image</button>
+            </form>
+        </div>
     </div>
     <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
     <div class="paginatorDiv">

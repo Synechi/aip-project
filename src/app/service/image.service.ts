@@ -32,8 +32,9 @@ export class ImageService {
         return this.http.get(`${this.uri}/get-all-images`);
     }
 
-    public deleteImage(imageUrl) {
+    public deleteImage(username, imageUrl) {
         const imageInfo = {
+            username: username,
             imageUrl: imageUrl
         }
         return this.http.post(`${this.uri}/delete-image`, imageInfo);
@@ -55,5 +56,12 @@ export class ImageService {
             imageUrl: imageUrl
         }
         return this.http.post(`${this.uri}/save-response-image-url`, responseImageInfo);
+    }
+
+    public replaceWithPlaceholder(oldImageUrl) {
+        const imageInfo = {
+            oldImageUrl: oldImageUrl,
+        }
+        return this.http.post(`${this.uri}/replace-with-placeholder`, imageInfo);
     }
 }

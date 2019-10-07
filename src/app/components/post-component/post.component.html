@@ -9,26 +9,19 @@
     <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: p1, id: 'postPaginator' }">
         <div class="postHeader">
             <h4>user: {{image.username}}</h4>
-            <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openDialog()">
+            <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openReportPostDialog()">
                 <mat-icon>flag</mat-icon>
             </button>
         </div>
         <img src="{{image.imageUrl}}">
 
         <div class="postBtns">
-            <mat-button-toggle-group *ngIf="currentUser">
-                <mat-button-toggle>👍</mat-button-toggle>
-                <mat-button-toggle>😆</mat-button-toggle>
-                <mat-button-toggle>😥</mat-button-toggle>
-                <mat-button-toggle>😮</mat-button-toggle>
-                <mat-button-toggle>😠</mat-button-toggle>
-            </mat-button-toggle-group>
- 
             <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
         </div>
         <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
             <div *ngIf="currentUser">
                 <hr>
+                <h4>Resposd to Post</h4>
                 <button mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
                     Create Response
                 </button>
