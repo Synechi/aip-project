@@ -3,6 +3,12 @@
     margin-top: 3%;
 }
 
+.sortBtn {
+    margin-left: 15%;
+    margin-bottom: 3%;
+    width: 20%;
+}
+
 .postComponent{
     margin-right: 15%;
     margin-left: 15%;
