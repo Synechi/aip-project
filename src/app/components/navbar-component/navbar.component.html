@@ -3,6 +3,11 @@
     <h2>AIP Assignment 3</h2>
   </div>
   <div>
+    <span>
+      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" routerLink="leaderboard">
+        LeaderBoard
+      </button>
+   </span>
     <span *ngIf="!username">
       <button *ngIf="!(isHandset$ | async)" mat-button class="navButtons" routerLink="login">
         Log In
@@ -11,20 +16,23 @@
         Sign Up
       </button>
 
-      <button 
+
+      <button
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
           *ngIf="isHandset$ | async"
-          mat-button 
+          mat-button
           [matMenuTriggerFor]="menu">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="login">Log in</button>
           <button mat-menu-item routerLink="signup">Sign up</button>
+          <button mat-menu-item routerLink="leaderboard">LeaderBoard</button>
+
       </mat-menu>
-        
+
     </span>
     <span *ngIf="username">
       <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" color="accent" routerLink="createPost">
@@ -37,12 +45,12 @@
         Logout
       </button>
 
-      <button 
+      <button
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
           *ngIf="isHandset$ | async"
-          mat-button 
+          mat-button
           [matMenuTriggerFor]="menu">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
