@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from "../../service/image.service";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-view-own-posts',
@@ -8,11 +9,13 @@ import { ImageService } from "../../service/image.service";
 })
 export class ViewOwnPostsComponent implements OnInit {
 
-  constructor(private imageService: ImageService) { }
+  constructor(
+    private imageService: ImageService,
+    private snackBar: MatSnackBar
+  ) { }
 
   username: string;
   images: any;
-  errorMessage: string;
   showSpinner: boolean = false;
 
   ngOnInit() {
@@ -25,7 +28,7 @@ export class ViewOwnPostsComponent implements OnInit {
         this.images = this.getPostsByUsename(this.images);
       },
       (err) => {
-        this.errorMessage = "Failed to load images, refresh the page to try again."
+        this.openErrorSnackBar("Failed to load images, refresh the page to try again", "Error");
       }
     );
   }
@@ -48,7 +51,8 @@ export class ViewOwnPostsComponent implements OnInit {
       },
       (err) => {
         this.showSpinner = false;
-        this.errorMessage = "Deletion Failed" 
+        this.openErrorSnackBar("Deletion Failed", "Error");
+ 
       }
     )
   }
@@ -101,13 +105,13 @@ export class ViewOwnPostsComponent implements OnInit {
             window.location.reload();
           },
           (err) => {
-            this.errorMessage = "Upload Failed"
+            this.openErrorSnackBar("Change Failed", "Error");
             this.showSpinner = false;
           }
         );
       },
       (err) => {
-        this.errorMessage = "Upload Failed"
+        this.openErrorSnackBar("Change Failed", "Error");
         this.showSpinner = false;
       }
     );
@@ -121,8 +125,15 @@ export class ViewOwnPostsComponent implements OnInit {
       },
       (err) => {
         this.showSpinner = false;
-        this.errorMessage = "Replacement Failed"
+        this.openErrorSnackBar("Replacement Failed", "Error");
       }
     );
+  }
+
+  // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  openErrorSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 }

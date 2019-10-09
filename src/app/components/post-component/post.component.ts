@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ImageService } from "../../service/image.service";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface ReportDialogData {
-  reportReason: string;
-}
+import { MatSnackBar } from '@angular/material';
 
 export interface CreateResponseDialogData{
   parentImageUrl: string | ArrayBuffer;
@@ -19,7 +16,8 @@ export class PostComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   images: any;
@@ -41,7 +39,7 @@ export class PostComponent implements OnInit {
         this.toggleResponsesBools.fill(false);
       },
       (err) => {
-        this.errorMessage = "Failed to load images, refresh the page to try again."
+        this.openErrorSnackBar("Failed to load images, refresh the page to try again.", "Error");
       }
     );
   }
@@ -61,6 +59,13 @@ export class PostComponent implements OnInit {
     } else {
       this.sortType = "Old"
     }
+  }
+
+  // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  openErrorSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 
   // Code made with material dialog documentation example: https://material.angular.io/components/dialog/overview
@@ -90,13 +95,13 @@ export class PostComponent implements OnInit {
           },
           (err) => {
             this.showSpinner = false;
-            this.errorMessage = "Upload Failed"
+            this.openErrorSnackBar("Upload Failed", "Error");
           }
         );
       },
       (err) => {
         this.showSpinner = false;
-        this.errorMessage = "Upload Failed"
+        this.openErrorSnackBar("Upload Failed", "Error");
       }
     );
   }

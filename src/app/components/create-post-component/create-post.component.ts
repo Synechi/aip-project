@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from "../../service/image.service";
 import { Router } from "@angular/router";
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class CreatePostComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   username: string;
@@ -62,14 +64,23 @@ export class CreatePostComponent implements OnInit {
           },
           (err) => {
             this.showSpinner = false;
-            this.errorMessage = "Upload Failed"
+            this.openErrorSnackBar("Upload Failed", "Error");
           }
         );
       },
       (err) => {
         this.showSpinner = false;
-        this.errorMessage = "Upload Failed"
+        this.openErrorSnackBar("Upload Failed", "Error");
       }
     );
   }
+
+
+  // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  openErrorSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
+
 }
