@@ -15,6 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableModule} from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -28,7 +29,7 @@ import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
 import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
-import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
+import { LeaderboardComponentComponent } from './components/leader-board/leader-board.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { LeaderBoardComponent } from './components/leader-board/leader-board.com
     CreatePostComponent,
     CreateResponse,
     ViewOwnPostsComponent,
-    LeaderBoardComponent
+    LeaderboardComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,8 @@ import { LeaderBoardComponent } from './components/leader-board/leader-board.com
     NgxPaginationModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
   ],
   entryComponents: [
     CreateResponse

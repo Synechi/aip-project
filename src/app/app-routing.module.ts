@@ -6,6 +6,8 @@ import { PostComponent } from './components/post-component/post.component';
 import { SignupComponent } from './components/signup-component/signup.component';
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
 import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
+import { LeaderboardComponentComponent } from './components/leader-board/leader-board.component';
+
 
 
 const routes: Routes = [
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'createPost', component: CreatePostComponent},
   { path: 'viewOwnPosts', component: ViewOwnPostsComponent},
+  { path: 'leaderboard', component: LeaderboardComponentComponent}
 
 ];
 

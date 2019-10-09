@@ -35,4 +35,8 @@ export class AuthService {
     };
     return this.http.post(`${this.uri}/add`, login);
   }
+
+  getAllUsers() {
+    return this.http.get(`${this.uri}/get-all-users`);
+  }
 }
