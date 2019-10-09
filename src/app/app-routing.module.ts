@@ -8,16 +8,19 @@ import { CreatePostComponent } from './components/create-post-component/create-p
 import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 
+import { AuthGuard } from "./guards/auth.guard";
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: PostComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'createPost', component: CreatePostComponent},
-  { path: 'viewOwnPosts', component: ViewOwnPostsComponent},
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [AuthGuard] },
+  { path: 'createPost', component: CreatePostComponent },
+  { path: 'viewOwnPosts', component: ViewOwnPostsComponent },
   { path: 'leaderboard', component: LeaderBoardComponent}
+
+
 
 ];
 

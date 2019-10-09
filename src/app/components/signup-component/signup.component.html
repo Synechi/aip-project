@@ -1,7 +1,7 @@
 <div class="signupComponent">
   <button mat-stroked-button color="primary" routerLink="/">&#60; Back</button>
   <h2>Sign Up</h2>
-  <p *ngIf="message">{{ message }}</p>
+  <p *ngIf="message" class="error">{{ message }}</p>
   <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
     <mat-form-field>
       <input matInput placeholder="Username" formControlName="userid" />
@@ -11,14 +11,18 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input
-        matInput
-        type="password"
-        placeholder="Password"
-        formControlName="password"
-      />
+      <input matInput type="password" placeholder="Password" formControlName="password" />
     </mat-form-field>
 
     <button mat-flat-button color="primary" type="submit">Register</button>
   </form>
+</div>
+<div class="infoComponent">
+  <h3>Requirements:</h3>
+
+  <ul>
+    <li>Username: Must be unique.</li>
+    <li>Email: Must be a valid email.</li>
+    <li>Password: Min 8 characters, must use atleast one uppercase letter, one lowercase letter and one number. </li>
+  </ul>
 </div>
