@@ -3,7 +3,7 @@ import { ImageService } from "../../service/image.service";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material';
 
-export interface CreateResponseDialogData{
+export interface CreateResponseDialogData {
   parentImageUrl: string | ArrayBuffer;
 }
 
@@ -25,7 +25,9 @@ export class PostComponent implements OnInit {
   currentUser: string;
   toggleResponsesBools: any;  
   showSpinner: boolean = false;
-
+  postsLoaded: Promise<boolean>;
+  p1: any;
+  p2: any;
   ngOnInit() {
     this.currentUser = localStorage.getItem("token");
 
@@ -37,6 +39,7 @@ export class PostComponent implements OnInit {
 
         this.toggleResponsesBools = new Array(this.images.length);
         this.toggleResponsesBools.fill(false);
+        this.postsLoaded = Promise.resolve(true);
       },
       (err) => {
         this.openErrorSnackBar("Failed to load images, refresh the page to try again.", "Error");
@@ -54,7 +57,7 @@ export class PostComponent implements OnInit {
     this.images.reverse();
     this.toggleResponsesBools.reverse();
 
-    if(this.sortType === "Old") {
+    if (this.sortType === "Old") {
       this.sortType = "New"
     } else {
       this.sortType = "Old"
@@ -72,11 +75,11 @@ export class PostComponent implements OnInit {
   openCreateResponseDialog(parentImageUrl) {
     const dialogRef = this.dialog.open(CreateResponse, {
       width: '50%',
-      data: {parentImageUrl: parentImageUrl}
+      data: { parentImageUrl: parentImageUrl }
     });
 
     dialogRef.afterClosed().subscribe(result => {   // Image file is retrieved here
-      if(result) {
+      if (result) {
         this.uploadResponseImage(result);
       }
     });
@@ -105,7 +108,7 @@ export class PostComponent implements OnInit {
       }
     );
   }
- 
+
 }
 
 
@@ -118,11 +121,11 @@ export class PostComponent implements OnInit {
 export class CreateResponse {
   constructor(public dialogRef: MatDialogRef<CreateResponse>,
     @Inject(MAT_DIALOG_DATA) public data: CreateResponseDialogData
-  ) {}
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
-  }  
+  }
 
   imageInfo: any;
   imgUrl: string | ArrayBuffer;
@@ -141,11 +144,11 @@ export class CreateResponse {
       this.uploadErrorMessage = "Image is too large";
       return;
     }
-  
+
     var fileReader = new FileReader();
-    fileReader.readAsDataURL(files[0]); 
-    fileReader.onload = (_event) => { 
-      this.imgUrl = fileReader.result; 
+    fileReader.readAsDataURL(files[0]);
+    fileReader.onload = (_event) => {
+      this.imgUrl = fileReader.result;
     }
 
     this.imageInfo = {

@@ -1,4 +1,4 @@
-<div class="mainBody">
+<div class="mainBody" *ngIf="postsLoaded | async">
         <div class="sortBtn">
             <button mat-raised-button (click)="changeSortType()">Sort Posts By {{sortType}}</button>
         </div>

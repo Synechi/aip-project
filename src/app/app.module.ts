@@ -28,7 +28,7 @@ import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
 import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
-import { LeaderboardComponentComponent } from './components/leaderboard-component/leaderboard-component.component';
+import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { LeaderboardComponentComponent } from './components/leaderboard-componen
     CreatePostComponent,
     CreateResponse,
     ViewOwnPostsComponent,
-    LeaderboardComponentComponent,
+    LeaderBoardComponent
   ],
   imports: [
     BrowserModule,

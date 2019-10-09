@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatePostComponent } from './create-post.component';
+import { LeaderBoardComponent } from './leader-board.component';
 
-describe('CreatePostComponent', () => {
-  let component: CreatePostComponent;
-  let fixture: ComponentFixture<CreatePostComponent>;
+describe('LeaderBoardComponent', () => {
+  let component: LeaderBoardComponent;
+  let fixture: ComponentFixture<LeaderBoardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatePostComponent ]
+      declarations: [ LeaderBoardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreatePostComponent);
+    fixture = TestBed.createComponent(LeaderBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,9 +8,9 @@ import { HttpClient } from "@angular/common/http";
 @Injectable()
 export class ImageService {
 
-    uri = "http://localhost:3000";
+    uri = "https://aip-restapi.herokuapp.com";
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient) { }
 
     public uploadImage(image: File) {
         var formData = new FormData();

@@ -7,9 +7,9 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class AuthService {
-  uri = "http://localhost:3000/users";
+  uri = "https://aip-restapi.herokuapp.com/users";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   logout(): void {
     localStorage.setItem("isLoggedIn", "false");
