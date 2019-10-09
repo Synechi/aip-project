@@ -1,0 +1,58 @@
+<div class="mainBody">
+        <div class="sortBtn">
+            <button mat-raised-button (click)="changeSortType()">Sort Posts By {{sortType}}</button>
+        </div>
+        <div *ngIf="errorMessage">
+            <h2>{{errorMessage}}</h2>
+        </div>
+        <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+        <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: p1, id: 'postPaginator' }">
+            <div class="postHeader">
+                <h4>user: {{image.username}}</h4>
+                <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openReportPostDialog()">
+                    <mat-icon>flag</mat-icon>
+                </button>
+            </div>
+            <img src="{{image.imageUrl}}">
+    
+            <div class="postBtns">
+                <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
+            </div>
+            <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
+                <div *ngIf="currentUser">
+                    <hr>
+                    <h4>Resposd to Post</h4>
+                    <button mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
+                        Create Response
+                    </button>
+                </div>
+                <hr>
+                <div>
+                    <h4>Responses</h4>
+                    <div class="responseComponent" *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: p2, id: 'responsePaginator' }">
+                        <div class="postHeader">
+                            <h4>user: {{child.username}}</h4>
+                            <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openDialog()">
+                                <mat-icon>flag</mat-icon>
+                            </button>
+                        </div>
+                        <img src="{{child.imageUrl}}">
+    
+                    </div>
+                    <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+                    <div class="paginatorDiv">
+                        <pagination-controls (pageChange)="p2 = $event" id="responsePaginator"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+        <div class="paginatorDiv">
+            <pagination-controls (pageChange)="p1 = $event" id="postPaginator"></pagination-controls>
+        </div>
+    
+    </div>
+    
+    
+    <router-outlet></router-outlet>
+    
