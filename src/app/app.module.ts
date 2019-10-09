@@ -12,6 +12,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatTableModule} from '@angular/material';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -25,6 +26,7 @@ import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
 import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
+import { LeaderboardComponentComponent } from './components/leaderboard-component/leaderboard-component.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { ViewOwnPostsComponent } from './components/view-own-posts-component/vie
     ReportPost,
     CreateResponse,
     ViewOwnPostsComponent,
+    LeaderboardComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { ViewOwnPostsComponent } from './components/view-own-posts-component/vie
     MatButtonToggleModule,
     MatDialogModule,
     NgxPaginationModule,
+    MatTableModule
   ],
   entryComponents: [
     ReportPost,
