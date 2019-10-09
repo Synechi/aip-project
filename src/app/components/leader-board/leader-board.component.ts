@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './leader-board.component.html',
   styleUrls: ['./leader-board.component.css']
 })
-export class LeaderboardComponentComponent implements OnInit {
+export class LeaderBoardComponent implements OnInit {
 
   // Code based on angular material documentation exapmle: https://material.angular.io/components/table/overview
   displayedColumns: string[] = ['username', 'numPosts'];
