@@ -19,9 +19,9 @@
                 <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
             </div>
             <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
-                <div *ngIf="currentUser">
+                <div *ngIf="currentUser && image.imageUrl != 'https://aip-project2019.s3.ap-southeast-2.amazonaws.com/1570419663723'">
                     <hr>
-                    <h4>Resposd to Post</h4>
+                    <h4>Respond to Post</h4>
                     <button mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
                         Create Response
                     </button>
