@@ -1,4 +1,4 @@
-<div class="mainBody">
+<div class="mainBody" *ngIf="postsLoaded | async">
     <div class="sortBtn">
         <button mat-raised-button (click)="changeSortType()">Sort Posts By {{sortType}}</button>
     </div>
@@ -6,7 +6,8 @@
         <h2>{{errorMessage}}</h2>
     </div>
     <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
-    <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: p1, id: 'postPaginator' }">
+    <div class="postComponent"
+        *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: p1, id: 'postPaginator' }">
         <div class="postHeader">
             <h4>user: {{image.username}}</h4>
             <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openReportPostDialog()">
@@ -16,7 +17,8 @@
         <img src="{{image.imageUrl}}">
 
         <div class="postBtns">
-            <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
+            <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle
+                Responses</button>
         </div>
         <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
             <div *ngIf="currentUser">
@@ -29,7 +31,8 @@
             <hr>
             <div>
                 <h4>Responses</h4>
-                <div class="responseComponent" *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: p2, id: 'responsePaginator' }">
+                <div class="responseComponent"
+                    *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: p2, id: 'responsePaginator' }">
                     <div class="postHeader">
                         <h4>user: {{child.username}}</h4>
                         <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openDialog()">
