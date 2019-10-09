@@ -27,6 +27,8 @@ export class PostComponent implements OnInit {
   currentUser: string;
   toggleResponsesBools: any;
   postsLoaded: Promise<boolean>;
+  p1: any;
+  p2: any;
   ngOnInit() {
     this.currentUser = localStorage.getItem("token");
 

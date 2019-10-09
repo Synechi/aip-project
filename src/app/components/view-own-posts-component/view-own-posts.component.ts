@@ -13,6 +13,7 @@ export class ViewOwnPostsComponent implements OnInit {
   username: string;
   images: any;
   errorMessage: string;
+  p: any;
 
   ngOnInit() {
     this.username = localStorage.getItem("token");
@@ -29,30 +30,30 @@ export class ViewOwnPostsComponent implements OnInit {
     );
   }
 
-  getPostsByUsename(images: any){
+  getPostsByUsename(images: any) {
     let userPosts = [];
-    for (let image of images){
-      if(image.username === this.username) {
+    for (let image of images) {
+      if (image.username === this.username) {
         userPosts.push(image);
       }
     }
     return userPosts;
   }
 
-  deletePost(imgUrl: string){
+  deletePost(imgUrl: string) {
     this.imageService.deleteImage(this.username, imgUrl).subscribe(
       (res) => {
         window.location.reload();
       },
       (err) => {
-        this.errorMessage = "Deletion Failed" 
+        this.errorMessage = "Deletion Failed"
       }
     )
   }
 
   imgURL: string | ArrayBuffer;
   uploadErrorMessage: string;
- 
+
   // Function source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
   seeImage(files) {
     this.imgURL = "";
@@ -68,9 +69,9 @@ export class ViewOwnPostsComponent implements OnInit {
     }
 
     var fileReader = new FileReader();
-    fileReader.readAsDataURL(files[0]); 
-    fileReader.onload = (_event) => { 
-      this.imgURL = fileReader.result; 
+    fileReader.readAsDataURL(files[0]);
+    fileReader.onload = (_event) => {
+      this.imgURL = fileReader.result;
     }
   }
 
@@ -79,7 +80,7 @@ export class ViewOwnPostsComponent implements OnInit {
   changeSortType() {
     this.images.reverse();
 
-    if(this.sortType === "Old") {
+    if (this.sortType === "Old") {
       this.sortType = "New"
     } else {
       this.sortType = "Old"

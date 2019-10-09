@@ -35,7 +35,7 @@
                     *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: p2, id: 'responsePaginator' }">
                     <div class="postHeader">
                         <h4>user: {{child.username}}</h4>
-                        <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openDialog()">
+                        <button *ngIf="currentUser" mat-flat-button color="warn">
                             <mat-icon>flag</mat-icon>
                         </button>
                     </div>
