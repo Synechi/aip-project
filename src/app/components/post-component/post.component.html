@@ -9,9 +9,6 @@
         <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: p1, id: 'postPaginator' }">
             <div class="postHeader">
                 <h4>user: {{image.username}}</h4>
-                <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openReportPostDialog()">
-                    <mat-icon>flag</mat-icon>
-                </button>
             </div>
             <img src="{{image.imageUrl}}">
     
@@ -32,9 +29,6 @@
                     <div class="responseComponent" *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: p2, id: 'responsePaginator' }">
                         <div class="postHeader">
                             <h4>user: {{child.username}}</h4>
-                            <button *ngIf="currentUser" mat-flat-button color="warn" (click)="openDialog()">
-                                <mat-icon>flag</mat-icon>
-                            </button>
                         </div>
                         <img src="{{child.imageUrl}}">
     

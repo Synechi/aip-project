@@ -62,21 +62,7 @@ export class PostComponent implements OnInit {
     }
   }
 
-  // Code retrieved from material dialog documentation example: https://material.angular.io/components/dialog/overview
-  reportReason: string;
-  openReportPostDialog() {
-    const dialogRef = this.dialog.open(ReportPost, {
-      width: '30%',
-      data: {reportReason: this.reportReason}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      this.reportReason = result;       // Report reason input is retrieved here
-    });
-  }
-
-
+  // Code made with material dialog documentation example: https://material.angular.io/components/dialog/overview
   openCreateResponseDialog(parentImageUrl) {
     const dialogRef = this.dialog.open(CreateResponse, {
       width: '50%',
@@ -114,22 +100,7 @@ export class PostComponent implements OnInit {
 }
 
 
-// Code retrieved from material dialog documentation: https://material.angular.io/components/dialog/overview
-@Component({
-  selector: 'report-post',
-  templateUrl: 'report-post.html',
-  styleUrls: ['report-post.css']
-})
-export class ReportPost {
-  constructor(public dialogRef: MatDialogRef<ReportPost>,
-    @Inject(MAT_DIALOG_DATA) public data: ReportDialogData
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }  
-}
-
+// Code made with material dialog documentation: https://material.angular.io/components/dialog/overview
 @Component({
   selector: 'create-response',
   templateUrl: 'create-response.html',
