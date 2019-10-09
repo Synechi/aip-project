@@ -50,3 +50,8 @@ button {
     text-align: center;
 }
 
+mat-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%
+}

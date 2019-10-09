@@ -26,6 +26,7 @@ export class PostComponent implements OnInit {
   errorMessage: string;
   currentUser: string;
   toggleResponsesBools: any;  
+  showSpinner: boolean = false;
 
   ngOnInit() {
     this.currentUser = localStorage.getItem("token");
@@ -78,6 +79,7 @@ export class PostComponent implements OnInit {
 
   // Upload image to amason s3, if successful save url to mongodb
   uploadResponseImage(imageInput) {
+    this.showSpinner = true;
     var file: File = imageInput.file;
     var parentImageUrl = imageInput.parentImageUrl
     this.imageService.uploadImage(file).subscribe(
@@ -87,11 +89,13 @@ export class PostComponent implements OnInit {
             window.location.reload();
           },
           (err) => {
+            this.showSpinner = false;
             this.errorMessage = "Upload Failed"
           }
         );
       },
       (err) => {
+        this.showSpinner = false;
         this.errorMessage = "Upload Failed"
       }
     );

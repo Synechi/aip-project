@@ -49,10 +49,11 @@ export class CreatePostComponent implements OnInit {
   }
 
 
-
+  showSpinner: boolean =  false;
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   uploadImage(imageInput) {
-    var file: File = imageInput.files[0];
+    this.showSpinner = true;
+    var file = imageInput.files[0];
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
         this.imageService.storeImageUrl(this.username, res.imageUrl).subscribe(
@@ -60,11 +61,13 @@ export class CreatePostComponent implements OnInit {
             this.router.navigate([this.returnUrl]);
           },
           (err) => {
+            this.showSpinner = false;
             this.errorMessage = "Upload Failed"
           }
         );
       },
       (err) => {
+        this.showSpinner = false;
         this.errorMessage = "Upload Failed"
       }
     );

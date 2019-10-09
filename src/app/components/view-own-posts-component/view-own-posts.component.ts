@@ -13,6 +13,7 @@ export class ViewOwnPostsComponent implements OnInit {
   username: string;
   images: any;
   errorMessage: string;
+  showSpinner: boolean = false;
 
   ngOnInit() {
     this.username = localStorage.getItem("token");
@@ -40,11 +41,13 @@ export class ViewOwnPostsComponent implements OnInit {
   }
 
   deletePost(imgUrl: string){
+    this.showSpinner = true;
     this.imageService.deleteImage(this.username, imgUrl).subscribe(
       (res) => {
         window.location.reload();
       },
       (err) => {
+        this.showSpinner = false;
         this.errorMessage = "Deletion Failed" 
       }
     )
@@ -89,6 +92,7 @@ export class ViewOwnPostsComponent implements OnInit {
 
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   changeImage(oldImageUrl, imageInput) {
+    this.showSpinner = true;
     var file: File = imageInput.files[0];
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
@@ -98,21 +102,25 @@ export class ViewOwnPostsComponent implements OnInit {
           },
           (err) => {
             this.errorMessage = "Upload Failed"
+            this.showSpinner = false;
           }
         );
       },
       (err) => {
         this.errorMessage = "Upload Failed"
+        this.showSpinner = false;
       }
     );
   }
 
   replaceWithPlaceholder(oldImageUrl) {
+    this.showSpinner = true;
     this.imageService.replaceWithPlaceholder(oldImageUrl).subscribe(
       (res) => {
         window.location.reload();
       },
       (err) => {
+        this.showSpinner = false;
         this.errorMessage = "Replacement Failed"
       }
     );

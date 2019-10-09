@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableModule} from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
@@ -56,7 +57,8 @@ import { LeaderboardComponentComponent } from './components/leaderboard-componen
     MatButtonToggleModule,
     MatDialogModule,
     NgxPaginationModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     CreateResponse
