@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from "../../service/image.service";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-view-own-posts',
@@ -8,10 +9,14 @@ import { ImageService } from "../../service/image.service";
 })
 export class ViewOwnPostsComponent implements OnInit {
 
-  constructor(private imageService: ImageService) { }
+  constructor(
+    private imageService: ImageService,
+    private snackBar: MatSnackBar
+  ) { }
 
   username: string;
   images: any;
+  showSpinner: boolean = false;
   errorMessage: string;
   p: any;
 
@@ -25,7 +30,7 @@ export class ViewOwnPostsComponent implements OnInit {
         this.images = this.getPostsByUsename(this.images);
       },
       (err) => {
-        this.errorMessage = "Failed to load images, refresh the page to try again."
+        this.openErrorSnackBar("Failed to load images, refresh the page to try again", "Error");
       }
     );
   }
@@ -40,13 +45,16 @@ export class ViewOwnPostsComponent implements OnInit {
     return userPosts;
   }
 
-  deletePost(imgUrl: string) {
+  deletePost(imgUrl: string){
+    this.showSpinner = true;
     this.imageService.deleteImage(this.username, imgUrl).subscribe(
       (res) => {
         window.location.reload();
       },
       (err) => {
-        this.errorMessage = "Deletion Failed"
+        this.showSpinner = false;
+        this.openErrorSnackBar("Deletion Failed", "Error");
+ 
       }
     )
   }
@@ -90,6 +98,7 @@ export class ViewOwnPostsComponent implements OnInit {
 
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   changeImage(oldImageUrl, imageInput) {
+    this.showSpinner = true;
     var file: File = imageInput.files[0];
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
@@ -98,24 +107,35 @@ export class ViewOwnPostsComponent implements OnInit {
             window.location.reload();
           },
           (err) => {
-            this.errorMessage = "Upload Failed"
+            this.openErrorSnackBar("Change Failed", "Error");
+            this.showSpinner = false;
           }
         );
       },
       (err) => {
-        this.errorMessage = "Upload Failed"
+        this.openErrorSnackBar("Change Failed", "Error");
+        this.showSpinner = false;
       }
     );
   }
 
   replaceWithPlaceholder(oldImageUrl) {
+    this.showSpinner = true;
     this.imageService.replaceWithPlaceholder(oldImageUrl).subscribe(
       (res) => {
         window.location.reload();
       },
       (err) => {
-        this.errorMessage = "Replacement Failed"
+        this.showSpinner = false;
+        this.openErrorSnackBar("Replacement Failed", "Error");
       }
     );
+  }
+
+  // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  openErrorSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 }

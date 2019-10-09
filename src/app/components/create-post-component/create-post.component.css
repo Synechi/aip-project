@@ -22,3 +22,9 @@ img {
     margin-bottom: 5%;
     width: 80%;
 }
+
+mat-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}

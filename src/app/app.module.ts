@@ -12,12 +12,15 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatTableModule} from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app-component/app.component";
 import { NavbarComponent } from "./components/navbar-component/navbar.component";
 import { LoginComponent } from "./components/login-component/login.component";
-import { PostComponent, ReportPost, CreateResponse } from "./components/post-component/post.component";
+import { PostComponent, CreateResponse } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
 
@@ -35,7 +38,6 @@ import { LeaderBoardComponent } from './components/leader-board/leader-board.com
     PostComponent,
     SignupComponent,
     CreatePostComponent,
-    ReportPost,
     CreateResponse,
     ViewOwnPostsComponent,
     LeaderBoardComponent
@@ -56,9 +58,11 @@ import { LeaderBoardComponent } from './components/leader-board/leader-board.com
     MatButtonToggleModule,
     MatDialogModule,
     NgxPaginationModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   entryComponents: [
-    ReportPost,
     CreateResponse
   ],
   providers: [AuthGuard, AuthService, ImageService],

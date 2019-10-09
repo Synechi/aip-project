@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ImageService } from "../../service/image.service";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface ReportDialogData {
-  reportReason: string;
-}
+import { MatSnackBar } from '@angular/material';
 
 export interface CreateResponseDialogData {
   parentImageUrl: string | ArrayBuffer;
@@ -19,13 +16,15 @@ export class PostComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   images: any;
   errorMessage: string;
   currentUser: string;
-  toggleResponsesBools: any;
+  toggleResponsesBools: any;  
+  showSpinner: boolean = false;
   postsLoaded: Promise<boolean>;
   p1: any;
   p2: any;
@@ -43,8 +42,7 @@ export class PostComponent implements OnInit {
         this.postsLoaded = Promise.resolve(true);
       },
       (err) => {
-        this.errorMessage = "Failed to load images, refresh the page to try again."
-        this.postsLoaded = Promise.resolve(true);
+        this.openErrorSnackBar("Failed to load images, refresh the page to try again.", "Error");
       }
     );
   }
@@ -66,21 +64,14 @@ export class PostComponent implements OnInit {
     }
   }
 
-  // Code retrieved from material dialog documentation example: https://material.angular.io/components/dialog/overview
-  reportReason: string;
-  openReportPostDialog() {
-    const dialogRef = this.dialog.open(ReportPost, {
-      width: '30%',
-      data: { reportReason: this.reportReason }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      this.reportReason = result;       // Report reason input is retrieved here
+  // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  openErrorSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
     });
   }
 
-
+  // Code made with material dialog documentation example: https://material.angular.io/components/dialog/overview
   openCreateResponseDialog(parentImageUrl) {
     const dialogRef = this.dialog.open(CreateResponse, {
       width: '50%',
@@ -96,6 +87,7 @@ export class PostComponent implements OnInit {
 
   // Upload image to amason s3, if successful save url to mongodb
   uploadResponseImage(imageInput) {
+    this.showSpinner = true;
     var file: File = imageInput.file;
     var parentImageUrl = imageInput.parentImageUrl
     this.imageService.uploadImage(file).subscribe(
@@ -105,12 +97,14 @@ export class PostComponent implements OnInit {
             window.location.reload();
           },
           (err) => {
-            this.errorMessage = "Upload Failed"
+            this.showSpinner = false;
+            this.openErrorSnackBar("Upload Failed", "Error");
           }
         );
       },
       (err) => {
-        this.errorMessage = "Upload Failed"
+        this.showSpinner = false;
+        this.openErrorSnackBar("Upload Failed", "Error");
       }
     );
   }
@@ -118,22 +112,7 @@ export class PostComponent implements OnInit {
 }
 
 
-// Code retrieved from material dialog documentation: https://material.angular.io/components/dialog/overview
-@Component({
-  selector: 'report-post',
-  templateUrl: 'report-post.html',
-  styleUrls: ['report-post.css']
-})
-export class ReportPost {
-  constructor(public dialogRef: MatDialogRef<ReportPost>,
-    @Inject(MAT_DIALOG_DATA) public data: ReportDialogData
-  ) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
-
+// Code made with material dialog documentation: https://material.angular.io/components/dialog/overview
 @Component({
   selector: 'create-response',
   templateUrl: 'create-response.html',

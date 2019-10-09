@@ -8,6 +8,7 @@ import { CreatePostComponent } from './components/create-post-component/create-p
 import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
 import { AuthGuard } from "./guards/auth.guard";
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: PostComponent },
