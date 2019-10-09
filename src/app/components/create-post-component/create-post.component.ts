@@ -53,7 +53,7 @@ export class CreatePostComponent implements OnInit {
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
   uploadImage(imageInput) {
     this.showSpinner = true;
-    var file = imageInput.files[0];
+    var file: File = imageInput.files[0];
     this.imageService.uploadImage(file).subscribe(
       (res: any) => {
         this.imageService.storeImageUrl(this.username, res.imageUrl).subscribe(
