@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   loginForm: FormGroup;
   message: string;
@@ -43,17 +43,23 @@ export class LoginComponent implements OnInit {
         username: this.f.userid.value,
         password: this.f.password.value
       };
-      this.authService.postUserLogin(this.userInfo).subscribe(data => {
-        console.log(data);
-        if (data) {
-          localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("token", this.f.userid.value);
-          this.router.navigate([this.returnUrl]);
-          return console.log("Login successful");
+      this.authService.postUserLogin(this.userInfo).subscribe(obs => {
+        let stringData = JSON.stringify(obs);
+        let data = JSON.parse(stringData);
+        if (data.success) {
+          this.correctLogin(this.userInfo.username)
         } else {
           this.message = "Please check your username and password.";
         }
       });
     }
+  }
+
+  correctLogin(userID) {
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("token", userID);
+    window.location.reload();
+    this.router.navigate(['/home']);
+    console.log("Login successful");
   }
 }
