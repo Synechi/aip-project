@@ -19,9 +19,6 @@ const routes: Routes = [
   { path: 'createPost', component: CreatePostComponent },
   { path: 'viewOwnPosts', component: ViewOwnPostsComponent },
   { path: 'leaderboard', component: LeaderBoardComponent}
-
-
-
 ];
 
 @NgModule({

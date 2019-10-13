@@ -121,8 +121,8 @@ export class PostComponent implements OnInit {
 // Code made with material dialog documentation: https://material.angular.io/components/dialog/overview
 @Component({
   selector: 'create-response',
-  templateUrl: '/create-response-component/create-response.html',
-  styleUrls: ['/create-response-component/create-response.css']
+  templateUrl: './create-response-component/create-response.html',
+  styleUrls: ['./create-response-component/create-response.css']
 })
 export class CreateResponse {
 
