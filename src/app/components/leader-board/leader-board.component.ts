@@ -22,14 +22,15 @@ export class LeaderBoardComponent implements OnInit {
 
   users: any;
 
+  // Initalise the page by loading all of the users
   ngOnInit() {
     this.authService.getAllUsers().subscribe(
       (res: any) => {
-
         this.users = Array.of(res);
-        this.users = new MatTableDataSource(this.users[0]);
+        this.users = new MatTableDataSource(this.users[0]);         // Add data to the table
 
         // Code by user sschmid from stackoverflow: https://stackoverflow.com/a/57165529
+        // This code sorts the users by the number of posts in descending order
         this.sort.sort(({ id: 'numPosts', start: 'desc', disableClear: false }));
         this.users.sort = this.sort;
       },

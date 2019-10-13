@@ -26,8 +26,11 @@ export class PostComponent implements OnInit {
   toggleResponsesBools: any;  
   showSpinner: boolean = false;
   postsLoaded: Promise<boolean>;
-  p1: any;
-  p2: any;
+  currPage: any;
+  currResponsePage: any;
+  sortType: string = "Old";
+
+  // Initialise page by loading all images
   ngOnInit() {
     this.currentUser = localStorage.getItem("token");
 
@@ -37,8 +40,8 @@ export class PostComponent implements OnInit {
         this.images = this.images[0];
         this.images.reverse();
 
-        this.toggleResponsesBools = new Array(this.images.length);
-        this.toggleResponsesBools.fill(false);
+        this.toggleResponsesBools = new Array(this.images.length);        // Create a array with the size of the amount of posts
+        this.toggleResponsesBools.fill(false);                            // and make all values false, indicating each post should not show responses
         this.postsLoaded = Promise.resolve(true);
       },
       (err) => {
@@ -47,12 +50,12 @@ export class PostComponent implements OnInit {
     );
   }
 
+  // Function will only toggle the responses for the post that it was clicked on 
   toggleResponses(imageIndex) {
     this.toggleResponsesBools[imageIndex] = !this.toggleResponsesBools[imageIndex];
   }
 
-  sortType: string = "Old";
-
+  // Reverses the order of posts and changes the text in the sortBtn
   changeSortType() {
     this.images.reverse();
     this.toggleResponsesBools.reverse();
@@ -65,6 +68,7 @@ export class PostComponent implements OnInit {
   }
 
   // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  // Display a snackbox pop up for 5 seconds 
   openErrorSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 5000,
@@ -72,20 +76,22 @@ export class PostComponent implements OnInit {
   }
 
   // Code made with material dialog documentation example: https://material.angular.io/components/dialog/overview
+  // Open the create-response component and pass the parent post's url
   openCreateResponseDialog(parentImageUrl) {
     const dialogRef = this.dialog.open(CreateResponse, {
       width: '50%',
       data: { parentImageUrl: parentImageUrl }
     });
 
-    dialogRef.afterClosed().subscribe(result => {   // Image file is retrieved here
+    // When the user clicks upload, the image is retrieved here and uploadResponseImage is called
+    dialogRef.afterClosed().subscribe(result => {   
       if (result) {
         this.uploadResponseImage(result);
       }
     });
   }
 
-  // Upload image to amason s3, if successful save url to mongodb
+  // Upload image to amason s3, if successful save url to mongodb as a child inside the parent image document
   uploadResponseImage(imageInput) {
     this.showSpinner = true;
     var file: File = imageInput.file;
@@ -115,11 +121,14 @@ export class PostComponent implements OnInit {
 // Code made with material dialog documentation: https://material.angular.io/components/dialog/overview
 @Component({
   selector: 'create-response',
-  templateUrl: 'create-response.html',
-  styleUrls: ['create-response.css']
+  templateUrl: '/create-response-component/create-response.html',
+  styleUrls: ['/create-response-component/create-response.css']
 })
 export class CreateResponse {
-  constructor(public dialogRef: MatDialogRef<CreateResponse>,
+
+  // MAT_DIALOG_DATA injecttion token is used so data from dialog can be accessed
+  constructor(
+    public dialogRef: MatDialogRef<CreateResponse>,
     @Inject(MAT_DIALOG_DATA) public data: CreateResponseDialogData
   ) { }
 
@@ -132,6 +141,9 @@ export class CreateResponse {
   uploadErrorMessage: string;
 
   // Function source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
+  // This function validates the file type and file size
+  // If the image passes these checks, a preview of the image is displayed
+  // and stores it in imageInfo 
   seeImage(files) {
     this.imgUrl = "";
     this.uploadErrorMessage = "";

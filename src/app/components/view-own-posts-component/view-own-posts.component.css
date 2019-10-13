@@ -1,57 +1,57 @@
 .mainBody {
-    width: 100%;
-    margin-top: 3%;
+  width: 100%;
+  margin-top: 3%;
 }
 
 .sortBtn {
-    margin-left: 15%;
-    margin-bottom: 3%;
-    width: 20%;
+  margin-left: 15%;
+  margin-bottom: 3%;
+  width: 20%;
 }
 
 .postComponent{
-    margin-right: 15%;
-    margin-left: 15%;
-    margin-bottom: 3%;
-    width: 70%;
-    background-color: white;
-    border: 1px solid #7500B9;;
-    border-radius: 4px;
-    padding: 10px;
+  margin-right: 15%;
+  margin-left: 15%;
+  margin-bottom: 3%;
+  width: 70%;
+  background-color: white;
+  border: 1px solid #7500B9;;
+  border-radius: 4px;
+  padding: 10px;
 }
 
+/* All children of postComponent have a bottom margin of 30px,
+   except the last child */
 .postComponent > *:not(:last-child) {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 
 img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
 
 button {
-    margin-right: 3%;
+  margin-right: 3%;
 }
 
-
-
 .paginatorDiv {
-    margin-right: 15%;
-    margin-left: 15%;
-    margin-bottom: 3%;
-    width: 70%;
-    background-color: white;
-    border: 1px solid #7500B9;;
-    border-radius: 4px;
-    padding: 5px;
-    text-align: center;
+  margin-right: 15%;
+  margin-left: 15%;
+  margin-bottom: 3%;
+  width: 70%;
+  background-color: white;
+  border: 1px solid #7500B9;;
+  border-radius: 4px;
+  padding: 5px;
+  text-align: center;
 }
 
 mat-spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%
+  position: fixed;
+  top: 50%;
+  left: 50%
 }

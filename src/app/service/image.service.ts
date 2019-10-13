@@ -8,60 +8,66 @@ import { HttpClient } from "@angular/common/http";
 @Injectable()
 export class ImageService {
 
-    uri = "https://aip-restapi.herokuapp.com";
+  uri = "https://aip-restapi.herokuapp.com";
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    public uploadImage(image: File) {
-        var formData = new FormData();
+  // Request to store image and return amazon s3 image URL 
+  public uploadImage(image: File) {
+    var formData = new FormData();
 
-        formData.append('image', image);
+    formData.append('image', image);
 
-        return this.http.post(`${this.uri}/image-upload`, formData);
+    return this.http.post(`${this.uri}/image-upload`, formData);
+  }
+
+  // Request to store image url and uploader's username in mongoDB
+  public storeImageUrl(username, imageUrl) {
+    const imageInfo = {
+      username: username,
+      imageUrl: imageUrl
     }
+    return this.http.post(`${this.uri}/save-url`, imageInfo);
+  }
 
-    public storeImageUrl(username, imageUrl) {
-        const imageInfo = {
-            username: username,
-            imageUrl: imageUrl
-        }
-        return this.http.post(`${this.uri}/save-url`, imageInfo);
+  // Retrieve a JSON object containing all image urls and uploader usernames
+  public getAllImages() {
+    return this.http.get(`${this.uri}/get-all-images`);
+  }
+
+  // Request to delete an image using using the imageUrl
+  public deleteImage(username, imageUrl) {
+    const imageInfo = {
+      username: username,
+      imageUrl: imageUrl
     }
+    return this.http.post(`${this.uri}/delete-image`, imageInfo);
+  }
 
-    public getAllImages() {
-        return this.http.get(`${this.uri}/get-all-images`);
+  // Request to replace the old image url with new
+  public updateImage(oldImageUrl, newimageUrl) {
+    const imageInfo = {
+      oldImageUrl: oldImageUrl,
+      newImageUrl: newimageUrl
     }
+    return this.http.post(`${this.uri}/update-image`, imageInfo);
+  }
 
-    public deleteImage(username, imageUrl) {
-        const imageInfo = {
-            username: username,
-            imageUrl: imageUrl
-        }
-        return this.http.post(`${this.uri}/delete-image`, imageInfo);
+  // Request to response image url
+  public storeResponseImageUrl(username, parentImageUrl, imageUrl) {
+    const responseImageInfo = {
+      username: username,
+      parentImageUrl: parentImageUrl,
+      imageUrl: imageUrl
     }
+    return this.http.post(`${this.uri}/save-response-image-url`, responseImageInfo);
+  }
 
-    public updateImage(oldImageUrl, newimageUrl) {
-        const imageInfo = {
-            oldImageUrl: oldImageUrl,
-            newImageUrl: newimageUrl
-        }
-        return this.http.post(`${this.uri}/update-image`, imageInfo);
-
+  // Request to replace image with placeholder
+  public replaceWithPlaceholder(oldImageUrl) {
+    const imageInfo = {
+      oldImageUrl: oldImageUrl,
     }
-
-    public storeResponseImageUrl(username, parentImageUrl, imageUrl) {
-        const responseImageInfo = {
-            username: username,
-            parentImageUrl: parentImageUrl,
-            imageUrl: imageUrl
-        }
-        return this.http.post(`${this.uri}/save-response-image-url`, responseImageInfo);
-    }
-
-    public replaceWithPlaceholder(oldImageUrl) {
-        const imageInfo = {
-            oldImageUrl: oldImageUrl,
-        }
-        return this.http.post(`${this.uri}/replace-with-placeholder`, imageInfo);
-    }
+    return this.http.post(`${this.uri}/replace-with-placeholder`, imageInfo);
+  }
 }

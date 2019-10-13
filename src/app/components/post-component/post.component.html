@@ -1,53 +1,81 @@
 <div class="mainBody" *ngIf="postsLoaded | async">
-        <div class="sortBtn">
-            <button mat-raised-button (click)="changeSortType()">Sort Posts By {{sortType}}</button>
-        </div>
-        <div *ngIf="errorMessage">
-            <h2>{{errorMessage}}</h2>
-        </div>
-        <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
-        <div class="postComponent" *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: p1, id: 'postPaginator' }">
-            <div class="postHeader">
-                <h4>user: {{image.username}}</h4>
-            </div>
-            <img src="{{image.imageUrl}}">
-    
-            <div class="postBtns">
-                <button mat-flat-button color="primary" (click)="toggleResponses(images.indexOf(image))">Toggle Responses</button>
-            </div>
-            <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
-                <div *ngIf="currentUser && image.imageUrl != 'https://aip-project2019.s3.ap-southeast-2.amazonaws.com/1570419663723'">
-                    <hr>
-                    <h4>Respond to Post</h4>
-                    <button mat-flat-button color="primary" (click)="openCreateResponseDialog(image.imageUrl)">
-                        Create Response
-                    </button>
-                </div>
-                <hr>
-                <div>
-                    <h4>Responses</h4>
-                    <div class="responseComponent" *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: p2, id: 'responsePaginator' }">
-                        <div class="postHeader">
-                            <h4>user: {{child.username}}</h4>
-                        </div>
-                        <img src="{{child.imageUrl}}">
-    
-                    </div>
-                    <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
-                    <div class="paginatorDiv">
-                        <pagination-controls (pageChange)="p2 = $event" id="responsePaginator"></pagination-controls>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
-        <div class="paginatorDiv">
-            <pagination-controls (pageChange)="p1 = $event" id="postPaginator"></pagination-controls>
-        </div>
-    
+  <div class="sortBtn">
+    <button 
+      mat-raised-button 
+      (click)="changeSortType()">
+      Sort Posts By {{sortType}}
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <h2>{{errorMessage}}</h2>
+  </div>
+
+  <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+  <!-- Paginator for front page is limiting the page to only show 5 posts at a time -->
+  <div class="postComponent" 
+    *ngFor="let image of images | paginate: { itemsPerPage: 5, currentPage: currPage, id: 'postPaginator' }">
+    <div class="postHeader">
+      <h4>user: {{image.username}}</h4>
     </div>
+
+    <img src="{{image.imageUrl}}">
     
-    <mat-spinner color="accent" *ngIf="showSpinner"></mat-spinner>
+    <div class="postBtns">
+      <!-- toggle the toggleReponsesBools[image index] to true so that specific post will show responses -->
+      <button 
+        mat-flat-button color="primary" 
+        (click)="toggleResponses(images.indexOf(image))">
+        Toggle Responses
+      </button>
+    </div>
+
+    <!-- If toggleReponsesBools[image index] is true, then show responses -->
+    <div *ngIf="toggleResponsesBools[images.indexOf(image)]">
+
+      <!-- Users can only upload responses if they are logged in -->
+      <div *ngIf="currentUser && image.imageUrl != 'https://aip-project2019.s3.ap-southeast-2.amazonaws.com/1570419663723'">
+        <hr>
+        <h4>Respond to Post</h4>
+
+        <button 
+          mat-flat-button color="primary" 
+          (click)="openCreateResponseDialog(image.imageUrl)">
+          Create Response
+        </button>
+      </div>
+      <hr>
+      <div>
+        <h4>Responses</h4>
+
+        <!-- Paginator responses is limiting the page to only show 3 posts at a time -->
+        <div class="responseComponent" 
+          *ngFor="let child of image.children | paginate: { itemsPerPage: 3, currentPage: currResponsePage, id: 'responsePaginator' }">
+          <div class="postHeader">
+            <h4>user: {{child.username}}</h4>
+          </div>
+
+          <img src="{{child.imageUrl}}">
+        </div>
+
+        <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+        <!-- Paginator for responses is displayed here -->
+        <div class="paginatorDiv">
+          <pagination-controls (pageChange)="currResponsePage = $event" id="responsePaginator"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Code from npx-pagination documentation: https://www.npmjs.com/package/ngx-pagination#styling-->
+    <!-- Paginator for front page is displayed here -->
+  <div class="paginatorDiv">
+    <pagination-controls (pageChange)="currPage = $event" id="postPaginator"></pagination-controls>
+  </div>
+</div>
     
-    <router-outlet></router-outlet>
+<!-- spinner will show itself when a button in a post is pressed -->
+<mat-spinner color="accent" *ngIf="showSpinner"></mat-spinner>
+    
+<router-outlet></router-outlet>
     

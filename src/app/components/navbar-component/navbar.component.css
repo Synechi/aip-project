@@ -1,10 +1,10 @@
+/* This separates two elements and creates a space between them */
 .navbar {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .navButtons {
-    width: 150px;
-    margin-left: 10px;
-    border: 1px solid white;
-
+  width: 150px;
+  margin-left: 10px;
+  border: 1px solid white;
 }

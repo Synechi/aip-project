@@ -24,12 +24,12 @@ import { LoginComponent } from "./components/login-component/login.component";
 import { PostComponent, CreateResponse } from "./components/post-component/post.component";
 import { SignupComponent } from "./components/signup-component/signup.component";
 import { CreatePostComponent } from './components/create-post-component/create-post.component';
+import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
+import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ImageService } from "./service/image.service";
-import { ViewOwnPostsComponent } from './components/view-own-posts-component/view-own-posts.component';
-import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 
 @NgModule({
   declarations: [

@@ -10,7 +10,11 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver) {}
+  
+  constructor(
+    private authService: AuthService, 
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   username: string;
 
@@ -24,6 +28,8 @@ export class NavbarComponent implements OnInit {
     window.location.reload();
   }
 
+  // Code automatically created by the material angular framework
+  // This detects whether the window size matches a mobile device
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
     map(result => result.matches),

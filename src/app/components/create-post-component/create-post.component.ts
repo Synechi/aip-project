@@ -28,8 +28,11 @@ export class CreatePostComponent implements OnInit {
 
   imgURL: string | ArrayBuffer;
   errorMessage: string;
+  showSpinner: boolean =  false;
  
   // Function source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
+  // This function validates the file type and file size
+  // If the image passes these checks, a preview of the image is displayed
   seeImage(files) {
     this.imgURL = "";
     this.errorMessage = "";
@@ -50,9 +53,9 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-
-  showSpinner: boolean =  false;
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
+  // First uploads image to amazon s3 and retrieves its url
+  // Then the url is stored in mongodb
   uploadImage(imageInput) {
     this.showSpinner = true;
     var file: File = imageInput.files[0];
@@ -74,7 +77,6 @@ export class CreatePostComponent implements OnInit {
       }
     );
   }
-
 
   // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
   openErrorSnackBar(message: string, action: string) {

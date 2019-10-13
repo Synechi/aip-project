@@ -1,37 +1,37 @@
 .signupComponent {
-    position: absolute;
-    left: 30%;
-    right: 30%;
-    max-width: 40%;
-    min-width: 100px;
-    top: 20%;
-    background-color: white;
-    border: 1px solid #7500B9;
-    border-radius: 4px;
-    padding: 10px;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  max-width: 40%;
+  min-width: 100px;
+  top: 20%;
+  background-color: white;
+  border: 1px solid #7500B9;
+  border-radius: 4px;
+  padding: 10px;
 }
 .infoComponent {
-    position: absolute;
-    left: 30%;
-    right: 30%;
-    max-width: 40%;
-    min-width: 100px;
-    top: 65%;
-    background-color: white;
-    border: 1px solid #7500B9;
-    border-radius: 4px;
-    padding: 10px;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  max-width: 40%;
+  min-width: 100px;
+  top: 65%;
+  background-color: white;
+  border: 1px solid #7500B9;
+  border-radius: 4px;
+  padding: 10px;
 }
 
 .error {
-    text-align: center;
-    color: red
+  text-align: center;
+  color: red
 }
 
 h2 {
-    color: #7500B9;
+  color: #7500B9;
 }
 
 mat-form-field {
-    width: 100%;
+  width: 100%;
 }

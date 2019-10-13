@@ -17,17 +17,21 @@ export class ViewOwnPostsComponent implements OnInit {
   username: string;
   images: any;
   showSpinner: boolean = false;
-  errorMessage: string;
-  p: any;
+  currPage: any;
+  imgURL: string | ArrayBuffer;
+  uploadErrorMessage: string;
+  sortType: string = "Old";
 
+  // Initialise page by loading all images 
   ngOnInit() {
     this.username = localStorage.getItem("token");
+
     this.imageService.getAllImages().subscribe(
       (res: any) => {
         this.images = Array.of(res);
         this.images = this.images[0];
-        this.images.reverse();
-        this.images = this.getPostsByUsename(this.images);
+        this.images.reverse();                                  // Reverse images that they are displayed from new to old
+        this.images = this.getPostsByUsename(this.images);      // Only show post made by the user
       },
       (err) => {
         this.openErrorSnackBar("Failed to load images, refresh the page to try again", "Error");
@@ -35,6 +39,7 @@ export class ViewOwnPostsComponent implements OnInit {
     );
   }
 
+  // return array only containing the user's posts
   getPostsByUsename(images: any) {
     let userPosts = [];
     for (let image of images) {
@@ -45,6 +50,7 @@ export class ViewOwnPostsComponent implements OnInit {
     return userPosts;
   }
 
+  // Delete post, if deletion is successful, refresh the page to update list of posts
   deletePost(imgUrl: string){
     this.showSpinner = true;
     this.imageService.deleteImage(this.username, imgUrl).subscribe(
@@ -54,19 +60,18 @@ export class ViewOwnPostsComponent implements OnInit {
       (err) => {
         this.showSpinner = false;
         this.openErrorSnackBar("Deletion Failed", "Error");
- 
       }
     )
   }
 
-  imgURL: string | ArrayBuffer;
-  uploadErrorMessage: string;
-
   // Function source: https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/
+  // This function validates the file type and file size
+  // If the image passes these checks, a preview of the image is displayed
   seeImage(files) {
     this.imgURL = "";
     this.uploadErrorMessage = "";
     var mimeType = files[0].type;
+
     if (mimeType.match(/image\/*/) == null) {
       this.uploadErrorMessage = "Only images can be uploaded";
       return;
@@ -83,8 +88,7 @@ export class ViewOwnPostsComponent implements OnInit {
     }
   }
 
-  sortType: string = "Old";
-
+  // Reverses the order of posts and changes the text in the sortBtn
   changeSortType() {
     this.images.reverse();
 
@@ -97,6 +101,8 @@ export class ViewOwnPostsComponent implements OnInit {
 
 
   // Code source from a tutorial by Filip Jerga: https://www.youtube.com/watch?v=wNqwExw-ECw
+  // First uploads image to amazon s3 and retrieves its url
+  // Then the url is stored in mongodb
   changeImage(oldImageUrl, imageInput) {
     this.showSpinner = true;
     var file: File = imageInput.files[0];
@@ -119,6 +125,8 @@ export class ViewOwnPostsComponent implements OnInit {
     );
   }
 
+  // Replaces image with a placeholder image
+  // The placeholder's image url is hardcoded in the backend
   replaceWithPlaceholder(oldImageUrl) {
     this.showSpinner = true;
     this.imageService.replaceWithPlaceholder(oldImageUrl).subscribe(
@@ -133,6 +141,7 @@ export class ViewOwnPostsComponent implements OnInit {
   }
 
   // Code source angular material documentation example: https://material.angular.io/components/snack-bar/overview
+  // Display a snackbox pop up for 5 seconds 
   openErrorSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 5000,

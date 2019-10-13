@@ -2,21 +2,35 @@
   <div routerLink="/">
     <h2>AIP Assignment 3</h2>
   </div>
+
   <div>
+    <!-- !(isHandset$ | async) will display these buttons if it is not in handheld mode -->
     <span>
-      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" routerLink="leaderboard">
+      <button 
+        *ngIf="!(isHandset$ | async)" 
+        mat-flat-button class="navButtons" 
+        routerLink="leaderboard">
         LeaderBoard
       </button>
-   </span>
+    </span>
+
+    <!-- If the user isn't logged in, this span will be displayed -->
     <span *ngIf="!username">
-      <button *ngIf="!(isHandset$ | async)" mat-button class="navButtons" routerLink="login">
+      <button 
+        *ngIf="!(isHandset$ | async)" 
+        mat-button class="navButtons" 
+        routerLink="login">
         Log In
       </button>
-      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" routerLink="signup">
+
+      <button 
+        *ngIf="!(isHandset$ | async)" 
+        mat-flat-button class="navButtons" 
+        routerLink="signup">
         Sign Up
       </button>
 
-
+      <!-- (isHandset$ | async) will display this menu button if it is in handheld mode -->
       <button
           type="button"
           aria-label="Toggle sidenav"
@@ -26,22 +40,33 @@
           [matMenuTriggerFor]="menu">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+
       <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="login">Log in</button>
           <button mat-menu-item routerLink="signup">Sign up</button>
           <button mat-menu-item routerLink="leaderboard">LeaderBoard</button>
-
       </mat-menu>
-
     </span>
+
+    <!-- If the user is logged in, this span will be displayed -->
     <span *ngIf="username">
-      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" color="accent" routerLink="createPost">
+      <button 
+        *ngIf="!(isHandset$ | async)" 
+        mat-flat-button class="navButtons" 
+        color="accent" 
+        routerLink="createPost">
         Create Post
       </button>
-      <button *ngIf="!(isHandset$ | async)" mat-flat-button class="navButtons" routerLink="viewOwnPosts">
+      <button 
+        *ngIf="!(isHandset$ | async)" 
+        mat-flat-button class="navButtons" 
+        routerLink="viewOwnPosts">
         Your Posts
       </button>
-      <button *ngIf="!(isHandset$ | async)" mat-button class="navButtons" (click)="logout()">
+      <button 
+        *ngIf="!(isHandset$ | async)" 
+        mat-button class="navButtons" 
+        (click)="logout()">
         Logout
       </button>
 
@@ -57,6 +82,7 @@
       <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="createPost">Create Post</button>
           <button mat-menu-item routerLink="viewOwnPosts">Your Posts</button>
+          <button mat-menu-item routerLink="leaderboard">LeaderBoard</button>
           <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </span>
