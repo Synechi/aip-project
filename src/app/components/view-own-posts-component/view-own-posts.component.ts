@@ -21,6 +21,7 @@ export class ViewOwnPostsComponent implements OnInit {
   imgURL: string | ArrayBuffer;
   uploadErrorMessage: string;
   sortType: string = "Old";
+  placeHolderImageUrl: string = "https://aip-project2019.s3.ap-southeast-2.amazonaws.com/1570419663723";
 
   // Initialise page by loading all images 
   ngOnInit() {

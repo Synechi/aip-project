@@ -11,7 +11,7 @@
 
     <!-- Button will only show if the post has responses and if it isn't already a placeholder -->
     <button 
-      *ngIf="image.children.length > 0 && image.imageUrl != 'https://aip-project2019.s3.ap-southeast-2.amazonaws.com/1570419663723'" 
+      *ngIf="image.children.length > 0 && image.imageUrl != placeHolderImageUrl" 
       mat-flat-button color="warn" 
       (click)="replaceWithPlaceholder(image.imageUrl)">
       Replace Image With Placeholder
