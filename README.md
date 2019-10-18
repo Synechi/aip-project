@@ -3,7 +3,7 @@
 Team BenIsDaBest :
 - Evan Hunter - 13248721
 - Christian Nguyen - 13254798
-- Jackson Rajbhandari - 
+- Jackson Rajbhandari - 12116772
 - Ezeekiel DeJong - 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
