@@ -21,12 +21,14 @@ export class SignupComponent implements OnInit {
   userInfo$;
 
   ngOnInit() {
+    //Create form object
     this.registerForm = this.formBuilder.group({
       userid: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,30})')]]
     });
     this.returnUrl = "/home";
+    //Logs out any user if they made it through the guard.
     this.authService.logout();
   }
 
@@ -35,20 +37,22 @@ export class SignupComponent implements OnInit {
   }
 
   registerUser() {
+    //Checks to see if the form is invalid
     if (this.registerForm.invalid) {
       return;
     } else {
+      //Stores form values into an object
       this.userInfo$ = {
         username: this.f.userid.value,
         email: this.f.email.value,
         password: this.f.password.value
       };
-      console.log("woot");
+      //Posts form data to RESTful api
       this.authService.postUserRegistration(this.userInfo$).subscribe(obs => {
         let stringData = JSON.stringify(obs);
         let data = JSON.parse(stringData);
         console.log(obs);
-
+        // Checks to see if there was any issues with the account creation with a special flag for username duplication
         if (data.success) {
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("token", this.f.userid.value);

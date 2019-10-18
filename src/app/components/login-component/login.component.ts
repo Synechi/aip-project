@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       password: ["", Validators.required]
     });
     this.returnUrl = "/home";
+    //Logs out any user if they made it through the guard.
     this.authService.logout();
   }
 
@@ -36,16 +37,20 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    //Checks to see if the form is invalid
     if (this.loginForm.invalid) {
       return;
     } else {
+      //Stores form values into an object
       this.userInfo = {
         username: this.f.userid.value,
         password: this.f.password.value
       };
+      //Posts form data to RESTful api
       this.authService.postUserLogin(this.userInfo).subscribe(obs => {
         let stringData = JSON.stringify(obs);
         let data = JSON.parse(stringData);
+        // Checks to see if there was any issues with the account credential check.
         if (data.success) {
           this.correctLogin(this.userInfo.username)
         } else {
@@ -54,7 +59,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-
+  //Sets the current logged in user id in local storage.
   correctLogin(userID) {
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("token", userID);
